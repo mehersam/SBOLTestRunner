@@ -1,0 +1,246 @@
+
+
+*************************************Working on Document: labhost_Saccharomyces_cerevisiae_orig.xml 40*************************************
+org.synbiohub.frontend.SynBioHubException: org.synbiohub.frontend.SynBioHubException: Error: java.lang.NullPointerException
+	at org.sbolstandard.core2.SBOLDocument.extractDocumentURIPrefix(SBOLDocument.java:1435)
+	at org.sbolstandard.core2.SBOLDocument.changeURIPrefixVersion(SBOLDocument.java:1779)
+	at org.synbiohub.PrepareSubmissionJob.execute(PrepareSubmissionJob.java:119)
+	at org.synbiohub.Main$1.run(Main.java:30)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+    at responseCallbacks.(anonymous function) (/root/synbiohub/lib/java.js:72:24)
+    at DestroyableTransform.javaProcess.stdout.pipe.on (/root/synbiohub/lib/java.js:34:5)
+    at emitOne (events.js:96:13)
+    at DestroyableTransform.emit (events.js:188:7)
+    at readableAddChunk (/root/synbiohub/node_modules/readable-stream/lib/_stream_readable.js:212:18)
+    at DestroyableTransform.Readable.push (/root/synbiohub/node_modules/readable-stream/lib/_stream_readable.js:171:10)
+    at DestroyableTransform.Transform.push (/root/synbiohub/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at DestroyableTransform.write [as _transform] (/root/synbiohub/node_modules/binary-split/index.js:24:14)
+    at DestroyableTransform.Transform._read (/root/synbiohub/node_modules/readable-stream/lib/_stream_transform.js:159:10)
+    at DestroyableTransform.Transform._write (/root/synbiohub/node_modules/readable-stream/lib/_stream_transform.js:147:83)
+    at doWrite (/root/synbiohub/node_modules/readable-stream/lib/_stream_writable.js:338:64)
+    at writeOrBuffer (/root/synbiohub/node_modules/readable-stream/lib/_stream_writable.js:327:5)
+    at DestroyableTransform.Writable.write (/root/synbiohub/node_modules/readable-stream/lib/_stream_writable.js:264:11)
+    at Socket.ondata (_stream_readable.js:555:20)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+
+*************************************Working on Document: labhost_Schizosaccharomyces_pombe.xml 41*************************************
+
+	at org.synbiohub.frontend.SynBioHubFrontend.submit(SynBioHubFrontend.java:527)
+	at sb_rdtrip_tester.TestRunner.<init>(TestRunner.java:57)
+	at sb_rdtrip_tester.test_Runner.main(test_Runner.java:41)
+Caused by: org.synbiohub.frontend.SynBioHubException: Error: java.lang.NullPointerException
+	at org.sbolstandard.core2.SBOLDocument.extractDocumentURIPrefix(SBOLDocument.java:1435)
+	at org.sbolstandard.core2.SBOLDocument.changeURIPrefixVersion(SBOLDocument.java:1779)
+	at org.synbiohub.PrepareSubmissionJob.execute(PrepareSubmissionJob.java:119)
+	at org.synbiohub.Main$1.run(Main.java:30)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at java.lang.Thread.run(Thread.java:745)
+
+    at responseCallbacks.(anonymous function) (/root/synbiohub/lib/java.js:72:24)
+    at DestroyableTransform.javaProcess.stdout.pipe.on (/root/synbiohub/lib/java.js:34:5)
+    at emitOne (events.js:96:13)
+    at DestroyableTransform.emit (events.js:188:7)
+    at readableAddChunk (/root/synbiohub/node_modules/readable-stream/lib/_stream_readable.js:212:18)
+    at DestroyableTransform.Readable.push (/root/synbiohub/node_modules/readable-stream/lib/_stream_readable.js:171:10)
+    at DestroyableTransform.Transform.push (/root/synbiohub/node_modules/readable-stream/lib/_stream_transform.js:123:32)
+    at DestroyableTransform.write [as _transform] (/root/synbiohub/node_modules/binary-split/index.js:24:14)
+    at DestroyableTransform.Transform._read (/root/synbiohub/node_modules/readable-stream/lib/_stream_transform.js:159:10)
+    at DestroyableTransform.Transform._write (/root/synbiohub/node_modules/readable-stream/lib/_stream_transform.js:147:83)
+    at doWrite (/root/synbiohub/node_modules/readable-stream/lib/_stream_writable.js:338:64)
+    at writeOrBuffer (/root/synbiohub/node_modules/readable-stream/lib/_stream_writable.js:327:5)
+    at DestroyableTransform.Writable.write (/root/synbiohub/node_modules/readable-stream/lib/_stream_writable.js:264:11)
+    at Socket.ondata (_stream_readable.js:555:20)
+    at emitOne (events.js:96:13)
+    at Socket.emit (events.js:188:7)
+	at org.synbiohub.frontend.SynBioHubFrontend.checkResponseCode(SynBioHubFrontend.java:697)
+	at org.synbiohub.frontend.SynBioHubFrontend.submit(SynBioHubFrontend.java:522)
+	... 2 more
+
+
+
+
+
+*************************************Working on Document: labhost_Schizosaccharomyces_pombe_orig.xml 42*************************************
+
+
+*************************************Working on Document: labhost_Unspecified.xml 43*************************************
+
+
+
+
+
+*************************************Working on Document: labhost_Unspecified_orig.xml 44*************************************
+
+
+*************************************Working on Document: memberAnnotations.xml 45*************************************
+
+
+*************************************Working on Document: ModelOutput.xml 46*************************************
+
+
+
+
+
+*************************************Working on Document: ModuleDefinitionOutput.xml 47*************************************
+
+
+*************************************Working on Document: multipleCollections_no_Members.xml 48*************************************
+
+
+
+
+
+*************************************Working on Document: multipleGenericTopLevel.xml 49*************************************
+
+
+*************************************Working on Document: multipleSequences.xml 50*************************************
+
+
+
+
+
+*************************************Working on Document: partial_pIKE_left_cassette.xml 51*************************************
+
+
+*************************************Working on Document: partial_pIKE_left_cassette_orig.xml 52*************************************
+
+
+*************************************Working on Document: partial_pIKE_right_casette.xml 53*************************************
+
+
+*************************************Working on Document: partial_pIKE_right_casette_orig.xml 54*************************************
+
+
+*************************************Working on Document: partial_pIKE_right_cassette.xml 55*************************************
+
+
+*************************************Working on Document: partial_pIKE_right_cassette_orig.xml 56*************************************
+
+
+*************************************Working on Document: partial_pTAK_left_cassette.xml 57*************************************
+
+
+*************************************Working on Document: partial_pTAK_left_cassette_orig.xml 58*************************************
+
+
+*************************************Working on Document: partial_pTAK_right_cassette.xml 59*************************************
+
+
+*************************************Working on Document: partial_pTAK_right_cassette_orig.xml 60*************************************
+
+
+*************************************Working on Document: pIKE_pTAK_cassettes 2.xml 61*************************************
+
+
+
+
+
+*************************************Working on Document: pIKE_pTAK_cassettes 2_orig.xml 62*************************************
+
+
+*************************************Working on Document: pIKE_pTAK_cassettes.xml 63*************************************
+
+
+
+
+
+*************************************Working on Document: pIKE_pTAK_cassettes_orig.xml 64*************************************
+
+
+*************************************Working on Document: pIKE_pTAK_left_right_cassettes.xml 65*************************************
+
+
+
+
+
+*************************************Working on Document: pIKE_pTAK_left_right_cassettes_orig.xml 66*************************************
+
+
+*************************************Working on Document: pIKE_pTAK_toggle_switches.xml 67*************************************
+
+
+
+
+
+*************************************Working on Document: pIKE_pTAK_toggle_switches_orig.xml 68*************************************
+
+
+*************************************Working on Document: RepressionModel.xml 69*************************************
+
+
+
+
+
+*************************************Working on Document: SBOL1and2Test.xml 70*************************************
+
+
+*************************************Working on Document: SBOLDocumentOutput.xml 71*************************************
+
+
+
+
+
+*************************************Working on Document: sequence1.xml 72*************************************
+
+
+
+
+
+*************************************Working on Document: sequence2.xml 73*************************************
+
+
+*************************************Working on Document: sequence3.xml 74*************************************
+
+
+
+
+
+*************************************Working on Document: sequence4.xml 75*************************************
+
+
+
+
+
+*************************************Working on Document: SequenceConstraintOutput.xml 76*************************************
+
+
+*************************************Working on Document: SequenceOutput.xml 77*************************************
+
+
+
+
+
+*************************************Working on Document: SimpleComponentDefinitionExample.xml 78*************************************
+
+
+*************************************Working on Document: SimpleModuleDefinition.xml 79*************************************
+
+
+
+
+
+*************************************Working on Document: singleCollection.xml 80*************************************
+
+
+*************************************Working on Document: singleCompDef_withSeq.xml 81*************************************
+
+
+
+
+
+*************************************Working on Document: singleComponentDefinition.xml 82*************************************
+
+
+
+
+
+*************************************Working on Document: singleFunctionalComponent.xml 83*************************************

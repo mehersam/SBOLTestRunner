@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbh="http://wiki.synbiohub.org/wiki/Terms/synbiohub#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sbol:Collection rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection"/>
+    <sbol:displayId>Tester_1_collection</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <dcterms:title>Round_Trip_Tester</dcterms:title>
+    <dcterms:description>This is a simple roundtrip test</dcterms:description>
+    <dc:creator>Meher</dc:creator>
+    <dcterms:created>2017-09-28T02:34:37.915Z</dcterms:created>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#Collection"/>
+    <sbol:member rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/1"/>
+  </sbol:Collection>
+  <sbol:ModuleDefinition rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression"/>
+    <sbol:displayId>GFP_expression</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#ModuleDefinition"/>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/GFP_protein/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/GFP_protein"/>
+        <sbol:displayId>GFP_protein</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#FunctionalComponent"/>
+        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#out"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:functionalComponent>
+      <sbol:FunctionalComponent rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/Constitutive_GFP/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/Constitutive_GFP"/>
+        <sbol:displayId>Constitutive_GFP</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#FunctionalComponent"/>
+        <sbol:definition rdf:resource="http://sbolstandard.org/example/GFP_generator"/>
+        <sbol:access rdf:resource="http://sbols.org/v2#public"/>
+        <sbol:direction rdf:resource="http://sbols.org/v2#in"/>
+      </sbol:FunctionalComponent>
+    </sbol:functionalComponent>
+    <sbol:interaction>
+      <sbol:Interaction rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/express_GFP/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/express_GFP"/>
+        <sbol:displayId>express_GFP</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/GFP_expression/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#Interaction"/>
+        <sbol:type rdf:resource="http://identifiers.org/biomodels.sbo/SBO:0000183"/>
+      </sbol:Interaction>
+    </sbol:interaction>
+  </sbol:ModuleDefinition>
+</rdf:RDF>
