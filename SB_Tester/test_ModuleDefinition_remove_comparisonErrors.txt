@@ -1,4 +1,0 @@
-Working on: partial_pIKE_left_cassette_orig.xml
-Working on: labhost_Schizosaccharomyces_pombe_orig.xml
-Working on: labhost_Unspecified_orig.xml
-Working on: multipleCollections_no_Members.xml

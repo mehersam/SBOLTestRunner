@@ -1,4 +1,0 @@
-Working on: labhost_Escherichia_Coli.xml
-Working on: SequenceOutput.xml
-Working on: labhost_Pichia_pastoris_orig.xml
-Working on: labhost_Unspecified.xml
