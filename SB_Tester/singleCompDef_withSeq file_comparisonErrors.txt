@@ -1,2 +1,0 @@
-Working on: singleCompDef_withSeq.xml
-Success

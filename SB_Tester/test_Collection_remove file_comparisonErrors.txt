@@ -1,2 +1,0 @@
-Working on: test_Collection_remove.xml
-Success

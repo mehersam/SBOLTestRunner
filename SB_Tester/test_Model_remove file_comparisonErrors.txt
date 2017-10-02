@@ -1,2 +1,0 @@
-Working on: test_Model_remove.xml
-Success
