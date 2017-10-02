@@ -1,0 +1,2 @@
+Working on: singleFunctionalComponent.xml
+Success

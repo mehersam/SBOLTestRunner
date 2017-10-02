@@ -81,29 +81,35 @@ public class SBOLTestRunner {
 		catch (SBOLValidationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Fail");
 			fail();
 		}
 		catch (SBOLConversionException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Fail");
 			fail();
 		}
 		catch (SynBioHubException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Fail");
 			fail();
 		}
 		catch (URISyntaxException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			System.err.println("Fail");
 			fail();
 		}
 		if (SBOLValidate.getNumErrors()!=0) {
 			for (String error : SBOLValidate.getErrors()) {
 				System.err.println(error);
 			}
+			System.err.println("Fail");
 			fail();
 		}
+		System.err.println("Success");
 		System.setErr(null);
 		fs.close();
 		bs.close();
