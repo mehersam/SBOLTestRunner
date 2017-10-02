@@ -47,7 +47,7 @@ public class TestRunner {
 	}
 
 	private void retrieve_compare(URI topLevelURI, String orig_file)
-			throws SynBioHubException, IOException, SBOLConversionException, URISyntaxException {
+			throws SynBioHubException, IOException, SBOLConversionException, URISyntaxException, SBOLValidationException {
 		
 		String retrieved_doc_file_name = (String) orig_file.subSequence(0, orig_file.length()-4);
 		
@@ -58,12 +58,8 @@ public class TestRunner {
 		String newPrefix = "https://synbiohub.utah.edu/user/mehersam/Tester_1/";
 		
 		//attempt to emulate the changes 
-		try {
-			doc = emulator(doc, newPrefix, topLevelURI);
-			doc = ack_changes(doc, retrievedDoc, newPrefix, topLevelURI);
-		} catch (SBOLValidationException e) {
-			e.printStackTrace();
-		}
+		doc = emulator(doc, newPrefix, topLevelURI);
+		doc = ack_changes(doc, retrievedDoc, newPrefix, topLevelURI);
 		doc.write(retrieved_doc_file_name + "_Emulated.xml");
 
 		SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);

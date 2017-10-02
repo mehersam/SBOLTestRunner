@@ -1,5 +1,7 @@
 package sb_rdtrip_tester;
 
+import static org.junit.Assert.*;
+
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.sbolstandard.core2.SBOLConversionException;
+import org.sbolstandard.core2.SBOLValidate;
 import org.sbolstandard.core2.SBOLValidationException;
 import org.synbiohub.frontend.SynBioHubException;
 
@@ -51,29 +54,8 @@ public class SBOLTestRunner {
 		return col;
 	}
 	
-	 @Before
-	 public void setUp() throws FileNotFoundException {
-		 	fs = new FileOutputStream(file.getName().substring(0, file.getName().length()-4) + " file_comparisonErrors.txt"); 
-		 	bs = new BufferedOutputStream(fs);
-			printStream = new PrintStream(bs, true);
-	//
-//			// set output stream to bos to capture output
-			//System.setOut(printStream);
-			System.setErr(printStream);
-	   }
-	 
-	 @After
-	 public void tearDown() throws IOException {
-			//System.setOut(null);
-			System.setErr(null);
-			fs.close();
-			bs.close();
-			printStream.close();
-	    }
-	
-	
 	@Test
-	public void test_TestRunner() throws SBOLValidationException, IOException, SBOLConversionException, SynBioHubException, URISyntaxException {
+	public void test_TestRunner() throws IOException {
 		String prefix = "https://synbiohub.utah.edu";
 		String email = "mehersam251@gmail.com";
 		String pass = "S@ipav12";
@@ -85,9 +67,47 @@ public class SBOLTestRunner {
 		
 		String topLevel = "https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"; 
 		URI TP_collection = URI.create(topLevel); 
+	 	fs = new FileOutputStream(file.getName().substring(0, file.getName().length()-4) + " file_comparisonErrors.txt"); 
+	 	bs = new BufferedOutputStream(fs);
+		printStream = new PrintStream(bs, true);
+//
+//		// set output stream to bos to capture output
+		//System.setOut(printStream);
+		System.setErr(printStream);
 		System.err.println("Working on: " + file.getName());
-		new  TestRunner (prefix, email, pass, file, id, version, name, description, TP_collection, true, true);
-	
+		try {
+			new  TestRunner (prefix, email, pass, file, id, version, name, description, TP_collection, true, true);
+		}
+		catch (SBOLValidationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail();
+		}
+		catch (SBOLConversionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail();
+		}
+		catch (SynBioHubException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail();
+		}
+		catch (URISyntaxException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			fail();
+		}
+		if (SBOLValidate.getNumErrors()!=0) {
+			for (String error : SBOLValidate.getErrors()) {
+				System.err.println(error);
+			}
+			fail();
+		}
+		System.setErr(null);
+		fs.close();
+		bs.close();
+		printStream.close();
 	}
 
 }
