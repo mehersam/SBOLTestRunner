@@ -66,17 +66,8 @@ public class TestRunner {
 		}
 		doc.write(retrieved_doc_file_name + "_Emulated.xml");
 
-
-//		FileOutputStream fs = new FileOutputStream(retrieved_doc_file_name + "_comparisonErrors.txt"); 
-//		BufferedOutputStream bs = new BufferedOutputStream(fs);
-//		PrintStream printStream = new PrintStream(bs, true);
-//
-//		// set output stream to bos to capture output
-//		System.setOut(printStream);
-//		System.setErr(printStream);
-		
 		SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
-
+		
 	}
 
 	private SBOLDocument ack_changes(SBOLDocument doc, SBOLDocument retrievedDoc, String newPrefix, URI topLevelURI) throws SBOLValidationException {
