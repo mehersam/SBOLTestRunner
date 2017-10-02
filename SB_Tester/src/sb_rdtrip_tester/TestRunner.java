@@ -53,14 +53,14 @@ public class TestRunner {
 		
 		SBOLDocument retrievedDoc = new SBOLDocument();
 		retrievedDoc = hub.getSBOL(topLevelURI); //get the SBOLDocument back
-		retrievedDoc.write("/Retrieved_Files/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
+		retrievedDoc.write("Retrieved_Files/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
 
 		String newPrefix = "https://synbiohub.utah.edu/user/mehersam/Tester_1/";
 		
 		//attempt to emulate the changes 
 		doc = emulator(doc, newPrefix, topLevelURI);
 		doc = ack_changes(doc, retrievedDoc, newPrefix, topLevelURI);
-		doc.write("/Emulated_Files/" + retrieved_doc_file_name + "_Emulated.xml");
+		doc.write("Emulated_Files/" + retrieved_doc_file_name + "_Emulated.xml");
 
 		SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
 		
