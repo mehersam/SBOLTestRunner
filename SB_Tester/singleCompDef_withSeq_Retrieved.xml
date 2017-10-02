@@ -1,0 +1,38 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbh="http://wiki.synbiohub.org/wiki/Terms/synbiohub#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sbol:Collection rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection"/>
+    <sbol:displayId>Tester_1_collection</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <dcterms:title>Round_Trip_Tester</dcterms:title>
+    <dcterms:description>This is a simple roundtrip test</dcterms:description>
+    <dc:creator>Meher</dc:creator>
+    <dcterms:created>2017-10-02T17:57:30.789Z</dcterms:created>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#Collection"/>
+    <sbol:member rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLac/1"/>
+    <sbol:member rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLacSeq/1"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLac/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLac"/>
+    <sbol:displayId>pLac</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLac/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000167"/>
+    <sbol:sequence rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLacSeq/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLacSeq/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLacSeq"/>
+    <sbol:displayId>pLacSeq</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/pLacSeq/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>ACGTURYSWKMBDHVN-.</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>

@@ -1,0 +1,333 @@
+<?xml version="1.0" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:sbh="http://wiki.synbiohub.org/wiki/Terms/synbiohub#" xmlns:sbol="http://sbols.org/v2#" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:ns0="http://purl.obolibrary.org/obo/" xmlns:ns2="http://sbols.org/genBankConversion#" xmlns:prov="http://www.w3.org/ns/prov#" xmlns:ns1="http://www.ncbi.nlm.nih.gov/genbank#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <sbol:Collection rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection"/>
+    <sbol:displayId>Tester_1_collection</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <dcterms:title>Round_Trip_Tester</dcterms:title>
+    <dcterms:description>This is a simple roundtrip test</dcterms:description>
+    <dc:creator>Meher</dc:creator>
+    <dcterms:created>2017-10-02T17:57:47.238Z</dcterms:created>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#Collection"/>
+    <sbol:member rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+    <sbol:member rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845_seq/1"/>
+  </sbol:Collection>
+  <sbol:ComponentDefinition rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845"/>
+    <sbol:displayId>U49845</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <dcterms:description>Saccharomyces cerevisiae TCP1-beta gene, partial cds; and Axl2p (AXL2) and Rev7p (REV7) genes, complete cds.</dcterms:description>
+    <ns0:OBI_0001617>8846915</ns0:OBI_0001617>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+    <ns1:GInumber>GI:1293613</ns1:GInumber>
+    <ns1:date>23-MAR-2010</ns1:date>
+    <ns1:division>PLN</ns1:division>
+    <ns1:keywords>.</ns1:keywords>
+    <ns1:locus>SCU49845</ns1:locus>
+    <ns1:molecule>DNA</ns1:molecule>
+    <ns1:organism>Saccharomyces cerevisiae Eukaryota; Fungi; Dikarya; Ascomycota; Saccharomycotina; Saccharomycetes; Saccharomycetales; Saccharomycetaceae; Saccharomyces.</ns1:organism>
+    <ns1:reference>
+      <ns1:Reference rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/www.async.ece.utah.eduU49845_reference0/1">
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <ns1:authors>Roemer,T., Madden,K., Chang,J. and Snyder,M.</ns1:authors>
+        <ns1:journal>Genes Dev. 10 (7), 777-793 (1996)</ns1:journal>
+        <ns1:label>1  (bases 1 to 5028)</ns1:label>
+        <ns1:pubmed>8846915</ns1:pubmed>
+        <ns1:title>Selection of axial growth sites in yeast requires Axl2p, a novel plasma membrane glycoprotein</ns1:title>
+      </ns1:Reference>
+    </ns1:reference>
+    <ns1:reference>
+      <ns1:Reference rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/www.async.ece.utah.eduU49845_reference1/1">
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <ns1:authors>Roemer,T.</ns1:authors>
+        <ns1:journal>Submitted (22-FEB-1996) Biology, Yale University, New Haven, CT 06520, USA</ns1:journal>
+        <ns1:label>2  (bases 1 to 5028)</ns1:label>
+        <ns1:title>Direct Submission</ns1:title>
+      </ns1:Reference>
+    </ns1:reference>
+    <ns1:source>Saccharomyces cerevisiae (baker's yeast)</ns1:source>
+    <rdf:type rdf:resource="http://sbols.org/v2#ComponentDefinition"/>
+    <sbol:type rdf:resource="http://www.biopax.org/release/biopax-level3.owl#DnaRegion"/>
+    <sbol:type rdf:resource="http://identifiers.org/so/SO:0000987"/>
+    <sbol:role rdf:resource="http://identifiers.org/so/SO:0000804"/>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation6/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation6"/>
+        <sbol:displayId>annotation6</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>REV7</dcterms:title>
+        <ns2:gene>REV7</ns2:gene>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000704"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation6/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation6/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <ns2:endGreaterThan>true</ns2:endGreaterThan>
+            <ns2:startLessThan>true</ns2:startLessThan>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>3300</sbol:start>
+            <sbol:end>4037</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#reverseComplement"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation2/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation2"/>
+        <sbol:displayId>annotation2</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>TCP1-beta</dcterms:title>
+        <ns2:codon_start>3</ns2:codon_start>
+        <ns2:db_xref>GI:1293614</ns2:db_xref>
+        <ns2:product>TCP1-beta</ns2:product>
+        <ns2:protein_id>AAA98665.1</ns2:protein_id>
+        <ns2:translation>SSIYNGISTSGLDLNNGTIADMRQLGIVESYKLKRAVVSSASEAAEVLLRVDNIIRARPRTANRQHM</ns2:translation>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation2/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation2/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <ns2:startLessThan>true</ns2:startLessThan>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>206</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation0/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation0"/>
+        <sbol:displayId>annotation0</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>Saccharomyces cerevisiae</dcterms:title>
+        <ns2:chromosome>IX</ns2:chromosome>
+        <ns2:db_xref>taxon:4932</ns2:db_xref>
+        <ns2:mol_type>genomic DNA</ns2:mol_type>
+        <ns2:organism>Saccharomyces cerevisiae</ns2:organism>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000149"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation0/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation0/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>5028</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation7/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation7"/>
+        <sbol:displayId>annotation7</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>Rev7p</dcterms:title>
+        <ns2:gene>REV7</ns2:gene>
+        <ns2:product>Rev7p</ns2:product>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000234"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation7/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation7/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <ns2:endGreaterThan>true</ns2:endGreaterThan>
+            <ns2:startLessThan>true</ns2:startLessThan>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>3300</sbol:start>
+            <sbol:end>4037</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#reverseComplement"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation4/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation4"/>
+        <sbol:displayId>annotation4</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>Axl2p</dcterms:title>
+        <ns2:gene>AXL2</ns2:gene>
+        <ns2:product>Axl2p</ns2:product>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000234"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation4/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation4/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <ns2:endGreaterThan>true</ns2:endGreaterThan>
+            <ns2:startLessThan>true</ns2:startLessThan>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>687</sbol:start>
+            <sbol:end>3158</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation3/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation3"/>
+        <sbol:displayId>annotation3</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>AXL2</dcterms:title>
+        <ns2:gene>AXL2</ns2:gene>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000704"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation3/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation3/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <ns2:endGreaterThan>true</ns2:endGreaterThan>
+            <ns2:startLessThan>true</ns2:startLessThan>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>687</sbol:start>
+            <sbol:end>3158</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation5/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation5"/>
+        <sbol:displayId>annotation5</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>Axl2p</dcterms:title>
+        <ns2:codon_start>1</ns2:codon_start>
+        <ns2:db_xref>GI:1293615</ns2:db_xref>
+        <ns2:gene>AXL2</ns2:gene>
+        <ns2:note>plasma membrane glycoprotein</ns2:note>
+        <ns2:product>Axl2p</ns2:product>
+        <ns2:protein_id>AAA98666.1</ns2:protein_id>
+        <ns2:translation>MTQLQISLLLTATISLLHLVVATPYEAYPIGKQYPPVARVNESFTFQISNDTYKSSVDKTAQITYNCFDLPSWLSFDSSSRTFSGEPSSDLLSDANTTLYFNVILEGTDSADSTSLNNTYQFVVTNRPSISLSSDFNLLALLKNYGYTNGKNALKLDPNEVFNVTFDRSMFTNEESIVSYYGRSQLYNAPLPNWLFFDSGELKFTGTAPVINSAIAPETSYSFVIIATDIEGFSAVEVEFELVIGAHQLTTSIQNSLIINVTDTGNVSYDLPLNYVYLDDDPISSDKLGSINLLDAPDWVALDNATISGSVPDELLGKNSNPANFSVSIYDTYGDVIYFNFEVVSTTDLFAISSLPNINATRGEWFSYYFLPSQFTDYVNTNVSLEFTNSSQDHDWVKFQSSNLTLAGEVPKNFDKLSLGLKANQGSQSQELYFNIIGMDSKITHSNHSANATSTRSSHHSTSTSSYTSSTYTAKISSTSAAATSSAPAALPAANKTSSHNKKAVAIACGVAIPLGVILVALICFLIFWRRRRENPDDENLPHAISGPDLNNPANKPNQENATPLNNPFDDDASSYDDTSIARRLAALNTLKLDNHSATESDISSVDEKRDSLSGMNTYNDQFQSQSKEELLAKPPVQPPESPFFDPQNRSSSVYMDSEPAVNKSWRYTGNLSPVSDIVRDSYGSQKTVDTEKLFDLEAPEKEKRTSRDVTMSSLDPWNSNISPSPVRKSVTPSPYNVTKHRNRHLQNIQDSQSGKNGITPTTMSTSSSDDFVPVKDGENFCWVHSMEPDRRPSKKRLVDFSNKSNVNVGQVKDIHGRIPEML</ns2:translation>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation5/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation5/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>687</sbol:start>
+            <sbol:end>3158</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation1/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation1"/>
+        <sbol:displayId>annotation1</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>TCP1-beta</dcterms:title>
+        <ns2:product>TCP1-beta</ns2:product>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000234"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation1/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation1/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <ns2:endGreaterThan>true</ns2:endGreaterThan>
+            <ns2:startLessThan>true</ns2:startLessThan>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>1</sbol:start>
+            <sbol:end>206</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#inline"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequenceAnnotation>
+      <sbol:SequenceAnnotation rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation8/1">
+        <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation8"/>
+        <sbol:displayId>annotation8</sbol:displayId>
+        <sbol:version>1</sbol:version>
+        <dcterms:title>Rev7p</dcterms:title>
+        <ns2:codon_start>1</ns2:codon_start>
+        <ns2:db_xref>GI:1293616</ns2:db_xref>
+        <ns2:gene>REV7</ns2:gene>
+        <ns2:product>Rev7p</ns2:product>
+        <ns2:protein_id>AAA98667.1</ns2:protein_id>
+        <ns2:translation>MNRWVEKWLRVYLKCYINLILFYRNVYPPQSFDYTTYQSFNLPQFVPINRHPALIDYIEELILDVLSKLTHVYRFSICIINKKNDLCIEKYVLDFSELQHVDKDDQIITETEVFDEFRSSLNSLIMHLEKLPKVNDDTITFEAVINAIELELGHKLDRNRRVDSLEEKAEIERDSNWVKCQEDENLPDNNGFQPPKIKLTSLVGSDVGPLIIHQFSEKLISGDDKILNGVYSQYEEGESIFGSLF</ns2:translation>
+        <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+        <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+        <rdf:type rdf:resource="http://sbols.org/v2#SequenceAnnotation"/>
+        <sbol:role rdf:resource="http://identifiers.org/so/SO:0000316"/>
+        <sbol:location>
+          <sbol:Range rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation8/range/1">
+            <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/annotation8/range"/>
+            <sbol:displayId>range</sbol:displayId>
+            <sbol:version>1</sbol:version>
+            <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+            <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845/1"/>
+            <rdf:type rdf:resource="http://sbols.org/v2#Range"/>
+            <sbol:start>3300</sbol:start>
+            <sbol:end>4037</sbol:end>
+            <sbol:orientation rdf:resource="http://sbols.org/v2#reverseComplement"/>
+          </sbol:Range>
+        </sbol:location>
+      </sbol:SequenceAnnotation>
+    </sbol:sequenceAnnotation>
+    <sbol:sequence rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845_seq/1"/>
+  </sbol:ComponentDefinition>
+  <sbol:Sequence rdf:about="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845_seq/1">
+    <sbol:persistentIdentity rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845_seq"/>
+    <sbol:displayId>U49845_seq</sbol:displayId>
+    <sbol:version>1</sbol:version>
+    <sbh:ownedBy rdf:resource="https://synbiohub.utah.edu/user/mehersam"/>
+    <sbh:topLevel rdf:resource="https://synbiohub.utah.edu/user/mehersam/Tester_1/U49845_seq/1"/>
+    <rdf:type rdf:resource="http://sbols.org/v2#Sequence"/>
+    <sbol:elements>gatcctccatatacaacggtatctccacctcaggtttagatctcaacaacggaaccattgccgacatgagacagttaggtatcgtcgagagttacaagctaaaacgagcagtagtcagctctgcatctgaagccgctgaagttctactaagggtggataacatcatccgtgcaagaccaagaaccgccaatagacaacatatgtaacatatttaggatatacctcgaaaataataaaccgccacactgtcattattataattagaaacagaacgcaaaaattatccactatataattcaaagacgcgaaaaaaaaagaacaacgcgtcatagaacttttggcaattcgcgtcacaaataaattttggcaacttatgtttcctcttcgagcagtactcgagccctgtctcaagaatgtaataatacccatcgtaggtatggttaaagatagcatctccacaacctcaaagctccttgccgagagtcgccctcctttgtcgagtaattttcacttttcatatgagaacttattttcttattctttactctcacatcctgtagtgattgacactgcaacagccaccatcactagaagaacagaacaattacttaatagaaaaattatatcttcctcgaaacgatttcctgcttccaacatctacgtatatcaagaagcattcacttaccatgacacagcttcagatttcattattgctgacagctactatatcactactccatctagtagtggccacgccctatgaggcatatcctatcggaaaacaataccccccagtggcaagagtcaatgaatcgtttacatttcaaatttccaatgatacctataaatcgtctgtagacaagacagctcaaataacatacaattgcttcgacttaccgagctggctttcgtttgactctagttctagaacgttctcaggtgaaccttcttctgacttactatctgatgcgaacaccacgttgtatttcaatgtaatactcgagggtacggactctgccgacagcacgtctttgaacaatacataccaatttgttgttacaaaccgtccatccatctcgctatcgtcagatttcaatctattggcgttgttaaaaaactatggttatactaacggcaaaaacgctctgaaactagatcctaatgaagtcttcaacgtgacttttgaccgttcaatgttcactaacgaagaatccattgtgtcgtattacggacgttctcagttgtataatgcgccgttacccaattggctgttcttcgattctggcgagttgaagtttactgggacggcaccggtgataaactcggcgattgctccagaaacaagctacagttttgtcatcatcgctacagacattgaaggattttctgccgttgaggtagaattcgaattagtcatcggggctcaccagttaactacctctattcaaaatagtttgataatcaacgttactgacacaggtaacgtttcatatgacttacctctaaactatgtttatctcgatgacgatcctatttcttctgataaattgggttctataaacttattggatgctccagactgggtggcattagataatgctaccatttccgggtctgtcccagatgaattactcggtaagaactccaatcctgccaatttttctgtgtccatttatgatacttatggtgatgtgatttatttcaacttcgaagttgtctccacaacggatttgtttgccattagttctcttcccaatattaacgctacaaggggtgaatggttctcctactattttttgccttctcagtttacagactacgtgaatacaaacgtttcattagagtttactaattcaagccaagaccatgactgggtgaaattccaatcatctaatttaacattagctggagaagtgcccaagaatttcgacaagctttcattaggtttgaaagcgaaccaaggttcacaatctcaagagctatattttaacatcattggcatggattcaaagataactcactcaaaccacagtgcgaatgcaacgtccacaagaagttctcaccactccacctcaacaagttcttacacatcttctacttacactgcaaaaatttcttctacctccgctgctgctacttcttctgctccagcagcgctgccagcagccaataaaacttcatctcacaataaaaaagcagtagcaattgcgtgcggtgttgctatcccattaggcgttatcctagtagctctcatttgcttcctaatattctggagacgcagaagggaaaatccagacgatgaaaacttaccgcatgctattagtggacctgatttgaataatcctgcaaataaaccaaatcaagaaaacgctacacctttgaacaacccctttgatgatgatgcttcctcgtacgatgatacttcaatagcaagaagattggctgctttgaacactttgaaattggataaccactctgccactgaatctgatatttccagcgtggatgaaaagagagattctctatcaggtatgaatacatacaatgatcagttccaatcccaaagtaaagaagaattattagcaaaacccccagtacagcctccagagagcccgttctttgacccacagaataggtcttcttctgtgtatatggatagtgaaccagcagtaaataaatcctggcgatatactggcaacctgtcaccagtctctgatattgtcagagacagttacggatcacaaaaaactgttgatacagaaaaacttttcgatttagaagcaccagagaaggaaaaacgtacgtcaagggatgtcactatgtcttcactggacccttggaacagcaatattagcccttctcccgtaagaaaatcagtaacaccatcaccatataacgtaacgaagcatcgtaaccgccacttacaaaatattcaagactctcaaagcggtaaaaacggaatcactcccacaacaatgtcaacttcatcttctgacgattttgttccggttaaagatggtgaaaatttttgctgggtccatagcatggaaccagacagaagaccaagtaagaaaaggttagtagatttttcaaataagagtaatgtcaatgttggtcaagttaaggacattcacggacgcatcccagaaatgctgtgattatacgcaacgatattttgcttaattttattttcctgttttattttttattagtggtttacagataccctatattttatttagtttttatacttagagacatttaattttaattccattcttcaaatttcatttttgcacttaaaacaaagatccaaaaatgctctcgccctcttcatattgagaatacactccattcaaaattttgtcgtcaccgctgattaatttttcactaaactgatgaataatcaaaggccccacgtcagaaccgactaaagaagtgagttttattttaggaggttgaaaaccattattgtctggtaaattttcatcttcttgacatttaacccagtttgaatccctttcaatttctgctttttcctccaaactatcgaccctcctgtttctgtccaacttatgtcctagttccaattcgatcgcattaataactgcttcaaatgttattgtgtcatcgttgactttaggtaatttctccaaatgcataatcaaactatttaaggaagatcggaattcgtcgaacacttcagtttccgtaatgatctgatcgtctttatccacatgttgtaattcactaaaatctaaaacgtatttttcaatgcataaatcgttctttttattaataatgcagatggaaaatctgtaaacgtgcgttaatttagaaagaacatccagtataagttcttctatatagtcaattaaagcaggatgcctattaatgggaacgaactgcggcaagttgaatgactggtaagtagtgtagtcgaatgactgaggtgggtatacatttctataaaataaaatcaaattaatgtagcattttaagtataccctcagccacttctctacccatctattcataaagctgacgcaacgattactattttttttttcttcttggatctcagtcgtcgcaaaaacgtataccttctttttccgaccttttttttagctttctggaaaagtttatattagttaaacagggtctagtcttagtgtgaaagctagtggtttcgattgactgatattaagaaagtggaaattaaattagtagtgtagacgtatatgcatatgtatttctcgcctgtttatgtttctacgtacttttgatttatagcaaggggaaaagaaatacatactattttttggtaaaggtgaaagcataatgtaaaagctagaataaaatggacgaaataaagagaggcttagttcatcttttttccaaaaagcacccaatgataataactaaaatgaaaaggatttgccatctgtcagcaacatcagttgtgtgagcaataataaaatcatcacctccgttgcctttagcgcgtttgtcgtttgtatcttccgtaattttagtcttatcaatgggaatcataaattttccaatgaattagcaatttcgtccaattctttttgagcttcttcatatttgctttggaattcttcgcacttcttttcccattcatctctttcttcttccaaagcaacgatccttctacccatttgctcagagttcaaatcggcctctttcagtttatccattgcttccttcagtttggcttcactgtcttctagctgttgttctagatcctggtttttcttggtgtagttctcattattagatctcaagttattggagtcttcagccaattgctttgtatcagacaattgactctctaacttctccacttcactgtcgagttgctcgtttttagcggacaaagatttaatctcgttttctttttcagtgttagattgctctaattctttgagctgttctctcagctcctcatatttttcttgccatgactcagattctaattttaagctattcaatttctctttgatc</sbol:elements>
+    <sbol:encoding rdf:resource="http://www.chem.qmul.ac.uk/iubmb/misc/naseq.html"/>
+  </sbol:Sequence>
+</rdf:RDF>
