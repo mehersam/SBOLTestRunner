@@ -67,7 +67,8 @@ public class SBOLTestRunner {
 		
 		String topLevel = "https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"; 
 		URI TP_collection = URI.create(topLevel); 
-	 	fs = new FileOutputStream(file.getName().substring(0, file.getName().length()-4) + " file_comparisonErrors.txt"); 
+	 	
+		fs = new FileOutputStream(file.getName().substring(0, file.getName().length()-4) + " file_comparisonErrors.txt"); 
 	 	bs = new BufferedOutputStream(fs);
 		printStream = new PrintStream(bs, true);
 //
