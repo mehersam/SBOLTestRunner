@@ -1,9 +1,14 @@
 package sb_rdtrip_tester;
 
+import java.io.BufferedOutputStream;
+
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.nio.file.Files;
 import java.util.List;
 
 import javax.xml.namespace.QName;
@@ -11,6 +16,7 @@ import javax.xml.namespace.QName;
 import org.sbolstandard.core2.Annotation;
 import org.sbolstandard.core2.Collection;
 import org.sbolstandard.core2.Identified;
+import org.sbolstandard.core2.Model;
 import org.sbolstandard.core2.SBOLConversionException;
 import org.sbolstandard.core2.SBOLDocument;
 import org.sbolstandard.core2.SBOLReader;
@@ -25,11 +31,11 @@ public class TestRunner {
 	private SynBioHubFrontend hub;
 	private SBOLDocument doc;
 
-	public TestRunner(String url, String prefix, String email, String pass, File read_file, String id, String version, String name,
+	public TestRunner(String prefix, String email, String pass, File read_file, String id, String version, String name,
 			String desc, URI TP_collection, boolean complete, boolean create_defaults) throws SBOLValidationException, IOException, SBOLConversionException,
 			SynBioHubException, URISyntaxException {
 
-		hub = new SynBioHubFrontend(url,prefix);
+		hub = new SynBioHubFrontend(prefix);
 		
 		login(email, pass);
 
@@ -49,14 +55,17 @@ public class TestRunner {
 		
 		SBOLDocument retrievedDoc = new SBOLDocument();
 		retrievedDoc = hub.getSBOL(topLevelURI); //get the SBOLDocument back
-		retrievedDoc.write("Retrieved_Files/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
+		
+		//TODO: check if directory doesn't exist
+		//if(Files.exists("Retrieved_Files"))
+		retrievedDoc.write("Retrieved/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
 
 		String newPrefix = "https://synbiohub.utah.edu/user/mehersam/Tester_1/";
 		
 		//attempt to emulate the changes 
 		doc = emulator(doc, newPrefix, topLevelURI);
 		doc = ack_changes(doc, retrievedDoc, newPrefix, topLevelURI);
-		doc.write("Emulated_Files/" + retrieved_doc_file_name + "_Emulated.xml");
+		doc.write("Emulated/" + retrieved_doc_file_name + "_Emulated.xml");
 
 		SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
 		
@@ -76,6 +85,14 @@ public class TestRunner {
 		Collection c = doc.getCollection("Tester_1_collection", "1");
 		c.createAnnotation(new QName("http://purl.org/dc/terms/", "created", "dcterms"), time);
 
+		//CHANGE 4: add source file name of uploaded document from Model obj
+		for(Model m : retrievedDoc.getModels())
+		{
+			String source = m.getSource().toString();
+			Model retrieved_Model = doc.getModel(m.getDisplayId(), m.getVersion());
+			retrieved_Model.createAnnotation(new QName("http://sbols.org/v2#", "source", "sbol"), source); 
+		}
+		
 		return retrievedDoc;
 	}
 
@@ -181,7 +198,7 @@ public class TestRunner {
 		doc.setComplete(complete);
 		doc.setCreateDefaults(create_default);
 		
-		SBOLReader.setKeepGoing(true);
+		//SBOLReader.setKeepGoing(true);
 		doc = SBOLReader.read(file_to_read.getAbsolutePath());
 		//doc.read(file_to_read.getAbsolutePath());
 	
@@ -189,3 +206,4 @@ public class TestRunner {
 
 	}
 }
+
