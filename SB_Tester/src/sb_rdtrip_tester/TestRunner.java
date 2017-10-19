@@ -1,11 +1,7 @@
 package sb_rdtrip_tester;
 
-import java.io.BufferedOutputStream;
-
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -29,11 +25,11 @@ public class TestRunner {
 	private SynBioHubFrontend hub;
 	private SBOLDocument doc;
 
-	public TestRunner(String prefix, String email, String pass, File read_file, String id, String version, String name,
+	public TestRunner(String url, String prefix, String email, String pass, File read_file, String id, String version, String name,
 			String desc, URI TP_collection, boolean complete, boolean create_defaults) throws SBOLValidationException, IOException, SBOLConversionException,
 			SynBioHubException, URISyntaxException {
 
-		hub = new SynBioHubFrontend(prefix);
+		hub = new SynBioHubFrontend(url,prefix);
 		
 		login(email, pass);
 
