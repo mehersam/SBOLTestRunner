@@ -31,11 +31,11 @@ public class TestRunner {
 	private SynBioHubFrontend hub;
 	private SBOLDocument doc;
 
-	public TestRunner(String prefix, String email, String pass, File read_file, String id, String version, String name,
+	public TestRunner(String url, String prefix, String email, String pass, File read_file, String id, String version, String name,
 			String desc, URI TP_collection, boolean complete, boolean create_defaults) throws SBOLValidationException, IOException, SBOLConversionException,
 			SynBioHubException, URISyntaxException {
 
-		hub = new SynBioHubFrontend(prefix);
+		hub = new SynBioHubFrontend(prefix, prefix);
 		
 		login(email, pass);
 
@@ -88,9 +88,9 @@ public class TestRunner {
 		//CHANGE 4: add source file name of uploaded document from Model obj
 		for(Model m : retrievedDoc.getModels())
 		{
-			String source = m.getSource().toString();
+			URI source = m.getSource();
 			Model retrieved_Model = doc.getModel(m.getDisplayId(), m.getVersion());
-			retrieved_Model.createAnnotation(new QName("http://sbols.org/v2#", "source", "sbol"), source); 
+			retrieved_Model.setSource(source);
 		}
 		
 		return retrievedDoc;

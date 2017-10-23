@@ -77,7 +77,7 @@ public class SBOLTestRunner {
 		System.setErr(printStream);
 		System.err.println("Working on: " + file.getName());
 		try {
-			new  TestRunner (prefix, email, pass, file, id, version, name, description, TP_collection, true, true);
+			new  TestRunner (prefix, prefix, email, pass, file, id, version, name, description, TP_collection, true, true);
 		}
 		catch (SBOLValidationException e) {
 			// TODO Auto-generated catch block

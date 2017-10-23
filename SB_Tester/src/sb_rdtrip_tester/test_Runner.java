@@ -32,7 +32,7 @@ public class test_Runner {
 		{
 			try {		
 				System.out.println("*************************************Working on: " + files[i].getName() + "*************************************");
-				new  TestRunner (prefix, email, pass, files[i], id, version, name, description, TP_collection, true, true);
+				new  TestRunner (prefix, prefix, email, pass, files[i], id, version, name, description, TP_collection, true, true);
 				System.out.println("\n\n");
 			} catch (SBOLValidationException | IOException | SBOLConversionException | SynBioHubException
 					| URISyntaxException e) {
