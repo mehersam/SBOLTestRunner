@@ -9,6 +9,8 @@ import java.io.PrintStream;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 import javax.xml.namespace.QName;
@@ -36,7 +38,7 @@ public class TestRunner {
 			SynBioHubException, URISyntaxException {
 
 		hub = new SynBioHubFrontend(prefix, prefix);
-		
+		settings();
 		login(email, pass);
 
 		create_design(prefix, read_file, complete, create_defaults);
@@ -47,6 +49,20 @@ public class TestRunner {
 		retrieve_compare(TP_collection, read_file.getName());
 
 	}
+	
+	public void settings()
+	{
+		//TODO: check if directory doesn't exist
+		if(!new File("Retrieved/").exists() && !new File("Retrieved/").isDirectory())
+			{
+				new File("Retrieved/").mkdir();
+			}
+		//TODO: check if directory doesn't exist
+		if(!new File("Emulated/").exists() && !new File("Emulated/").isDirectory())
+			{
+				new File("Emulated/").mkdir();
+			}
+	}
 
 	private void retrieve_compare(URI topLevelURI, String orig_file)
 			throws SynBioHubException, IOException, SBOLConversionException, URISyntaxException, SBOLValidationException {
@@ -56,8 +72,7 @@ public class TestRunner {
 		SBOLDocument retrievedDoc = new SBOLDocument();
 		retrievedDoc = hub.getSBOL(topLevelURI); //get the SBOLDocument back
 		
-		//TODO: check if directory doesn't exist
-		//if(Files.exists("Retrieved_Files"))
+	
 		retrievedDoc.write("Retrieved/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
 
 		String newPrefix = "https://synbiohub.utah.edu/user/mehersam/Tester_1/";

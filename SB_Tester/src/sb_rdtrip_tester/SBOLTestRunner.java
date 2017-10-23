@@ -1,7 +1,6 @@
 package sb_rdtrip_tester;
 
 import static org.junit.Assert.*;
-
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -43,7 +42,9 @@ public class SBOLTestRunner {
 		File file_base = null ;
 		java.util.Collection<File> col = new HashSet<File>();
 		try {
+			
 			file_base = new File(SBOLTestRunner.class.getResource("/SBOL2/").toURI());
+			System.out.println(file_base.getAbsolutePath());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -68,6 +69,12 @@ public class SBOLTestRunner {
 		String topLevel = "https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"; 
 		URI TP_collection = URI.create(topLevel); 
 	 	
+		//TODO: check if directory doesn't exist
+		if(!new File("Compared/").exists() && !new File("Compared/").isDirectory())
+			{
+				new File("Compared/").mkdir();
+			}
+		
 		fs = new FileOutputStream("Compared/" + file.getName().substring(0, file.getName().length()-4) + "_file_comparisonErrors.txt"); 
 	 	bs = new BufferedOutputStream(fs);
 		printStream = new PrintStream(bs, true);
