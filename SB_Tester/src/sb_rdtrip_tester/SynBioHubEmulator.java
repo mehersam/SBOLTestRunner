@@ -28,12 +28,12 @@ import org.sbolstandard.core2.TopLevel;
 import org.synbiohub.frontend.SynBioHubException;
 import org.synbiohub.frontend.SynBioHubFrontend;
 
-public class TestRunner {
+public class SynBioHubEmulator {
 
 	private SynBioHubFrontend hub;
 	private SBOLDocument doc;
 
-	public TestRunner(String url, String prefix, String email, String pass, File read_file, String id, String version, String name,
+	public SynBioHubEmulator(String url, String prefix, String email, String pass, File read_file, String id, String version, String name,
 			String desc, URI TP_collection, boolean complete, boolean create_defaults) throws SBOLValidationException, IOException, SBOLConversionException,
 			SynBioHubException, URISyntaxException {
 
