@@ -1,6 +1,7 @@
 package sb_rdtrip_tester;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
@@ -8,11 +9,6 @@ import java.net.URISyntaxException;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import net.sf.json.JSONObject; 
-import net.sf.json.JSONSerializer;
-
-import javax.json.Json;
-import javax.json.JsonObject;
-import javax.json.JsonValue;
 import javax.xml.namespace.QName;
 
 import org.sbolstandard.core2.Annotation;
@@ -22,7 +18,6 @@ import org.sbolstandard.core2.Model;
 import org.sbolstandard.core2.SBOLConversionException;
 import org.sbolstandard.core2.SBOLDocument;
 import org.sbolstandard.core2.SBOLReader;
-import org.sbolstandard.core2.SBOLValidate;
 import org.sbolstandard.core2.SBOLValidationException;
 import org.sbolstandard.core2.TopLevel;
 import org.synbiohub.frontend.SynBioHubException;
@@ -32,72 +27,51 @@ public class SynBioHubEmulator {
 
 	private SynBioHubFrontend hub;
 	private SBOLDocument doc;
-	private JSONObject value; 
-	private Config config; //this needs an empty constructor with some default values for prefix?
-	
+	private Config config; //this needs an empty constructor with some default values i.e prefix, etc..?
+	private File input_file; 
 	public SynBioHubEmulator(File read_file, String settings_file) throws SBOLValidationException, IOException, SBOLConversionException,
 			SynBioHubException, URISyntaxException {
 		
+		input_file = read_file; 
 		config = parse_JSON(settings_file); //read in settings file
 		
 		hub = new SynBioHubFrontend(config.get_url(), config.get_prefix());
-		initialize_results();
 		login(config.get_email(), config.get_pass());
 		
-		create_design(config.get_prefix(), read_file, config.get_complete(), config.get_defaults());
+		create_design(config.get_prefix(), input_file, config.get_complete(), config.get_defaults());
 
 		// submit document to SB
 		hub.submit(config.get_id(), config.get_version(), config.get_name(), config.get_desc(), "", "", "1", doc);
 
-		retrieve_compare(config.get_TP_col(), read_file.getName());
+		//retrieve(config.get_TP_col(), read_file.getName());
 
 	}
-	
-	public void initialize_results()
-	{
-		//TODO: check if directory doesn't exist
-		if(!new File("Retrieved/").exists() && !new File("Retrieved/").isDirectory())
-			{
-				new File("Retrieved/").mkdir();
-			}
-		//TODO: check if directory doesn't exist
-		if(!new File("Emulated/").exists() && !new File("Emulated/").isDirectory())
-			{
-				new File("Emulated/").mkdir();
-			}
-	}
 
-	private void retrieve_compare(URI topLevelURI, String orig_file)
+	public JSONObject retrieve()
 			throws SynBioHubException, IOException, SBOLConversionException, URISyntaxException, SBOLValidationException {
-		
-		String retrieved_doc_file_name = (String) orig_file.subSequence(0, orig_file.length()-4);
-		
+				
 		SBOLDocument retrievedDoc = new SBOLDocument();
-		retrievedDoc = hub.getSBOL(topLevelURI); //get the SBOLDocument back
+		retrievedDoc = hub.getSBOL(config.get_TP_col()); //get the SBOLDocument back
 		
-		retrievedDoc.write("Retrieved/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
+		//retrievedDoc.write("Retrieved/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
 
-		String newPrefix = "https://synbiohub.utah.edu/user/mehersam/Tester_1/";
+		String newPrefix = "https://synbiohub.utah.edu/user/" + config.get_user() + "/" + config.get_id() + "/";
 		
 		//attempt to emulate the changes 
-		doc = emulator(doc, newPrefix, topLevelURI);
-		doc = ack_changes(doc, retrievedDoc, newPrefix, topLevelURI);
-		doc.write("Emulated/" + retrieved_doc_file_name + "_Emulated.xml");
+		doc = emulator(doc, newPrefix, config.get_TP_col());
+		doc = ack_changes(doc, retrievedDoc, newPrefix, config.get_TP_col());
+		//doc.write("Emulated/" + retrieved_doc_file_name + "_Emulated.xml");
 
 		//SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
-		JsonObject value = Json.createObjectBuilder()
-			     .add("Retrieved", (JsonValue) retrievedDoc)
-			     .add("Emulated", (JsonValue) doc)
-			     .add("orig_file_name", orig_file)
-			     .build();
-		}
-	
-	public JSONObject send_docs()
-	{
-		return value;
-		
-	}
+		  JSONObject value = new JSONObject();
+	        value.put("Retrieved", retrievedDoc);
+	        value.put("Emulated", doc);
+	        value.put("orig_file_name", input_file.getName()); 
 
+		
+		return value; 
+	}
+	
 
 	private SBOLDocument ack_changes(SBOLDocument doc, SBOLDocument retrievedDoc, String newPrefix, URI topLevelURI) throws SBOLValidationException {
 		
@@ -110,7 +84,7 @@ public class SynBioHubEmulator {
 				time = a.getStringValue();
 		}
 		
-		Collection c = doc.getCollection("Tester_1_collection", "1");
+		Collection c = doc.getCollection(config.get_id() + "_collection", config.get_version());
 		c.createAnnotation(new QName("http://purl.org/dc/terms/", "created", "dcterms"), time);
 
 		//CHANGE 4: add source file name of uploaded document from Model obj
@@ -132,13 +106,13 @@ public class SynBioHubEmulator {
 		doc.setDefaultURIprefix(newPrefix);
 
 		// CHANGE 2: add owned by annotation to Collection
-		String ownedByURI = "https://synbiohub.utah.edu/user/mehersam";
+		String ownedByURI = "https://synbiohub.utah.edu/user/" + config.get_user();
 
 		// CHANGE 4: add top level collection
 		Collection c = doc.createCollection("Tester_1_collection", "1");
 
-		String name = "Round_Trip_Tester";
-		String description = "This is a simple roundtrip test";
+		String name = config.get_name();
+		String description = config.get_desc();
 		c.setName(name);
 		c.setDescription(description);
 		c.createAnnotation(new QName("http://purl.org/dc/elements/1.1/", "creator", "dc"), "Meher");
@@ -217,14 +191,6 @@ public class SynBioHubEmulator {
 		}
 		return true;
 	}
-	
-	private SBOLDocument create_design(File f) throws SBOLValidationException, IOException, SBOLConversionException
-	{
-		doc = new SBOLDocument();
-		doc.setComplete(true);
-		doc = SBOLReader.read(f); 
-		return doc; 
-	}
 
 	private SBOLDocument create_design(String prefix, File file_to_read, boolean complete, boolean create_default)
 			throws SBOLValidationException, IOException, SBOLConversionException {
@@ -244,15 +210,17 @@ public class SynBioHubEmulator {
 	
 	private Config parse_JSON(String settings_file) throws IOException, URISyntaxException
 	{		
-	InputStream is = 
-             SynBioHubEmulator.class.getResourceAsStream(settings_file);
-     String jsonTxt = IOUtils.toString( is );
 
-     JSONObject json = (JSONObject) JSONSerializer.toJSON( jsonTxt );        
+	File f = new File(SynBioHubEmulator.class.getResource(settings_file).toURI());
+    InputStream is = new FileInputStream(f);
+    String jsonTxt = IOUtils.toString(is, "UTF-8");
+    JSONObject json = JSONObject.fromString(jsonTxt);       
+
      String url = json.getString( "url" );
      String prefix = json.getString( "prefix" );
      String email = json.getString( "email" );
      String pass = json.getString( "pass" );
+     String user = json.getString("user");
      String id = json.getString( "id" );
      String version = json.getString( "version" );
      String name = json.getString( "name" );
@@ -261,8 +229,8 @@ public class SynBioHubEmulator {
      boolean complete = json.getBoolean("complete"); 
      boolean create_defaults = json.getBoolean("create_defaults"); 
 
- 	 return new Config(url, prefix, email, pass, id, version, name, desc, TP_collection, complete, create_defaults); 
-  
+ 	 return new Config(url, prefix, email, pass, user, id, version, name, desc, TP_collection, complete, create_defaults); 
+ 	 
 	}
  }
 	

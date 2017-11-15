@@ -63,8 +63,7 @@
 //		
 //		String id = "Tester_1";
 //		String version = "1";
-//		String name = "Roun"
-//				+ "d_Trip_Tester";
+//		String name = "Round_Trip_Tester";
 //		String description = "This is a simple roundtrip test"; 
 //		
 //		String topLevel = "https://synbiohub.utah.edu/user/mehersam/Tester_1/Tester_1_collection/1"; 
@@ -80,8 +79,6 @@
 //	 	bs = new BufferedOutputStream(fs);
 //		printStream = new PrintStream(bs, true);
 ////
-////		// set output stream to bos to capture output
-//		//System.setOut(printStream);
 //		System.setErr(printStream);
 //		System.err.println("Working on: " + file.getName());
 //		try {

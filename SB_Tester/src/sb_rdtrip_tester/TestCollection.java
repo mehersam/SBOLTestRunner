@@ -24,8 +24,22 @@ public class TestCollection {
 			return invalidFiles(); 
 		else if(id.equals("rdf"))
 			return rdf(); 
+		else if(id.equals("all"))
+			return all(); 
 		else throw new Exception("Invalid id passed, cannot find Collection"); 
 		
+	}
+	
+	private Collection<File> all()
+	{
+		java.util.Collection<File> sbol_files = new HashSet<File>();
+		sbol_files.addAll(sbol2()); 
+		sbol_files.addAll(sbol1()); 
+		sbol_files.addAll(gb()); 
+		sbol_files.addAll(invalidFiles()); 
+		sbol_files.addAll(rdf()); 
+		
+		return sbol_files; 
 	}
 	
 	private Collection<File> sbol2()

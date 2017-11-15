@@ -8,6 +8,7 @@ public class Config {
 	private String prefix; 
 	private String email; 
 	private String pass; 
+	private String user; 
 	private String id; 
 	private String version; 
 	private String name;
@@ -16,13 +17,14 @@ public class Config {
 	private boolean complete; 
 	private boolean create_defaults; 
 	
-	public Config(String _url, String _prefix, String _email, String _pass, String _id, String _version, 
+	public Config(String _url, String _prefix, String _email, String _pass, String _user, String _id, String _version, 
 			String _name, String _desc, URI _TP_collection, boolean _complete, boolean _create_defaults)
 	{
 		url = _url; 
 		prefix = _prefix; 
 		email =_email; 
 		pass = _pass; 
+		user = _user; 
 		id = _id; 
 		version = _version; 
 		name = _name; 
@@ -49,6 +51,10 @@ public class Config {
 	}
 	
 	public String get_pass()
+	{
+		return this.pass; 
+	}
+	public String get_user()
 	{
 		return this.pass; 
 	}
