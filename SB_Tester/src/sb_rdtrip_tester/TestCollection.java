@@ -38,7 +38,6 @@ public class TestCollection {
 		sbol_files.addAll(gb()); 
 		sbol_files.addAll(invalidFiles()); 
 		sbol_files.addAll(rdf()); 
-		
 		return sbol_files; 
 	}
 	

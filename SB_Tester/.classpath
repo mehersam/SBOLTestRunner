@@ -17,6 +17,7 @@
 	<classpathentry exported="true" kind="lib" path="C:/Users/Meher/Documents/Masters_Program/thesis/SBOLTestRunner/json-simple-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Meher/Documents/Masters_Program/thesis/SBOLTestRunner/SB_Tester/ezmorph-1.0.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="C:/Users/Meher/Documents/Masters_Program/thesis/SBOLTestRunner/SB_Tester/apache-commons-lang.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Meher/Documents/Masters_Program/thesis/SBOLTestRunner/SB_Tester/org.apache.commons.beanutils.jar"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>

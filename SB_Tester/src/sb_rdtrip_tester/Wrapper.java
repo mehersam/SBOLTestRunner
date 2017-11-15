@@ -42,8 +42,11 @@ public class Wrapper {
 			SBOLDocument emulated = (SBOLDocument) output.get("Emulated");
 			SBOLDocument retrieved = (SBOLDocument) output.get("Retrieved");
 			
-			wrapper.writeRetrieved(orig_file + "_Retrieved.xml", retrieved);
-			wrapper.writeEmulated(orig_file + "_Emulated.xml", emulated); 
+			retrieved.write("Retrieved/" + orig_file + "_Retrieved.xml");
+			emulated.write("Emulated/" + orig_file + "_Emulated.xml");
+
+			//wrapper.writeRetrieved(orig_file + "_Retrieved.xml", retrieved);
+			//wrapper.writeEmulated(orig_file + "_Emulated.xml", emulated); 
 
 			wrapper.compare(orig_file, emulated, retrieved); 
 			}

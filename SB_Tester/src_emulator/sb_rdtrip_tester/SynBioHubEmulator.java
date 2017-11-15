@@ -63,10 +63,10 @@ public class SynBioHubEmulator {
 		//doc.write("Emulated/" + retrieved_doc_file_name + "_Emulated.xml");
 
 		//SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
-		  JSONObject value = new JSONObject();
-	        value.put("Retrieved", retrievedDoc);
-	        value.put("Emulated", doc);
-	        value.put("orig_file_name", input_file.getName()); 
+		 JSONObject value = new JSONObject();
+	        value.put("Retrieved", (SBOLDocument) retrievedDoc);
+	        value.put("Emulated", (SBOLDocument) doc);
+	        value.put("orig_file_name", (String)input_file.getName()); 
 
 		
 		return value; 
