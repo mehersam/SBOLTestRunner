@@ -159,7 +159,7 @@ public class SynBioHubEmulator {
 
 	}
 
-	private void addTopLevelToNestedAnnotations(TopLevel topLevel, List<Annotation> annotations) {
+	private void addTopLevelToNestedAnnotations(TopLevel topLevel, List<Annotation> annotations) throws SBOLValidationException {
 		for (Annotation annotation : annotations) {
 			if (annotation.isNestedAnnotations()) {
 				List<Annotation> nestedAnnotations = annotation.getAnnotations();
@@ -211,27 +211,27 @@ public class SynBioHubEmulator {
 	private Config parse_JSON(String settings_file) throws IOException, URISyntaxException
 	{		
 
-	File f = new File(SynBioHubEmulator.class.getResource(settings_file).toURI());
-    InputStream is = new FileInputStream(f);
-    String jsonTxt = IOUtils.toString(is, "UTF-8");
-    JSONObject json = JSONObject.fromString(jsonTxt);       
+		File f = new File(SynBioHubEmulator.class.getResource(settings_file).toURI());
+		InputStream is = new FileInputStream(f);
+		String jsonTxt = IOUtils.toString(is, "UTF-8");
+		JSONObject json = JSONObject.fromString(jsonTxt);       
 
-     String url = json.getString( "url" );
-     String prefix = json.getString( "prefix" );
-     String email = json.getString( "email" );
-     String pass = json.getString( "pass" );
-     String user = json.getString("user");
-     String id = json.getString( "id" );
-     String version = json.getString( "version" );
-     String name = json.getString( "name" );
-     String desc = json.getString( "desc" );
-     URI TP_collection = new URI(json.getString("topLevel")); 
-     boolean complete = json.getBoolean("complete"); 
-     boolean create_defaults = json.getBoolean("create_defaults"); 
+		String url = json.getString( "url" );
+		String prefix = json.getString( "prefix" );
+		String email = json.getString( "email" );
+		String pass = json.getString( "pass" );
+		String user = json.getString("user");
+		String id = json.getString( "id" );
+		String version = json.getString( "version" );
+		String name = json.getString( "name" );
+		String desc = json.getString( "desc" );
+		URI TP_collection = new URI(json.getString("topLevel")); 
+		boolean complete = json.getBoolean("complete"); 
+		boolean create_defaults = json.getBoolean("create_defaults"); 
 
- 	 return new Config(url, prefix, email, pass, user, id, version, name, desc, TP_collection, complete, create_defaults); 
- 	 
+		return new Config(url, prefix, email, pass, user, id, version, name, desc, TP_collection, complete, create_defaults); 
+
 	}
- }
-	
+}
+
 

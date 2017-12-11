@@ -49,7 +49,7 @@ public class TestCollection {
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/SBOL2/").toURI());
+			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/SBOL2/").toURI());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -69,7 +69,7 @@ public class TestCollection {
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/SBOL1/").toURI());
+			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/SBOL1/").toURI());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -89,7 +89,7 @@ public class TestCollection {
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/GenBank/").toURI());
+			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/GenBank/").toURI());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -109,7 +109,7 @@ public class TestCollection {
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/InvalidFiles/").toURI());
+			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/InvalidFiles/").toURI());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -129,7 +129,7 @@ public class TestCollection {
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/RDF/").toURI());
+			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/RDF/").toURI());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();

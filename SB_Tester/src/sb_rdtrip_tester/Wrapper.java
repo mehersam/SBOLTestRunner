@@ -29,55 +29,58 @@ public class Wrapper {
 	
 		for(File f : wrapper.run("all"))
 		{
+			System.out.println(f.getAbsolutePath());
 			fs = new FileOutputStream("Compared/" + f.getName().substring(0, f.getName().length()-4) + "_file_comparisonErrors.txt"); 
 			bs = new BufferedOutputStream(fs);
 			printStream = new PrintStream(bs, true);
 			System.setErr(printStream);
-			
+
 			try{
-			emulator = new SynBioHubEmulator(f, args[0]); 
-			
-			JSONObject output = emulator.retrieve(); 
-			String orig_file = output.getString("orig_file_name");
-			SBOLDocument emulated = (SBOLDocument) output.get("Emulated");
-			SBOLDocument retrieved = (SBOLDocument) output.get("Retrieved");
-			
-			retrieved.write("Retrieved/" + orig_file + "_Retrieved.xml");
-			emulated.write("Emulated/" + orig_file + "_Emulated.xml");
+				emulator = new SynBioHubEmulator(f, args[0]); 
 
-			//wrapper.writeRetrieved(orig_file + "_Retrieved.xml", retrieved);
-			//wrapper.writeEmulated(orig_file + "_Emulated.xml", emulated); 
+				JSONObject output = emulator.retrieve(); 
+				String orig_file = output.getString("orig_file_name");
+				SBOLDocument emulated = (SBOLDocument) output.get("Emulated");
+				SBOLDocument retrieved = (SBOLDocument) output.get("Retrieved");
 
-			wrapper.compare(orig_file, emulated, retrieved); 
+				retrieved.write("Retrieved/" + orig_file + "_Retrieved.xml");
+				emulated.write("Emulated/" + orig_file + "_Emulated.xml");
+
+				//wrapper.writeRetrieved(orig_file + "_Retrieved.xml", retrieved);
+				//wrapper.writeEmulated(orig_file + "_Emulated.xml", emulated); 
+
+				wrapper.compare(orig_file, emulated, retrieved); 
 			}
 			catch (SBOLValidationException e) {
-			e.printStackTrace();
-			System.err.println("Fail");
-		}
-		catch (SBOLConversionException e) {
-			e.printStackTrace();
-			System.err.println("Fail");
-		}
-		catch (SynBioHubException e) {
-			e.printStackTrace();
-			System.err.println("Fail");
-		}
-		catch (URISyntaxException e) {
-			e.printStackTrace();
-			System.err.println("Fail");
-		}
-		if (SBOLValidate.getNumErrors()!=0) {
-			for (String error : SBOLValidate.getErrors()) {
-				System.err.println(error);
+				e.printStackTrace();
+				System.err.println("Fail");
 			}
-			System.err.println("Fail");
-		}
+			catch (SBOLConversionException e) {
+				e.printStackTrace();
+				System.err.println("Fail");
+			}
+			catch (SynBioHubException e) {
+				e.printStackTrace();
+				System.err.println("Fail");
+			}
+			catch (URISyntaxException e) {
+				e.printStackTrace();
+				System.err.println("Fail");
+			}
+			if (SBOLValidate.getNumErrors()!=0) {
+				for (String error : SBOLValidate.getErrors()) {
+					System.err.println(error);
+				}
+				System.err.println("Fail");
+			} else {
+				System.out.println("Success");
+			}
 		}
 		System.setErr(null);
 		fs.close();
 		bs.close();
 		printStream.close();
-		
+
 	}
 
 }
