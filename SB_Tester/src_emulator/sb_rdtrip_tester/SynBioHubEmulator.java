@@ -64,14 +64,30 @@ public class SynBioHubEmulator {
 
 		//SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
 		 JSONObject value = new JSONObject();
-	        value.put("Retrieved", (SBOLDocument) retrievedDoc);
-	        value.put("Emulated", (SBOLDocument) doc);
+	        value.put("Retrieved", retrievedDoc);
+	        value.put("Emulated", doc);
 	        value.put("orig_file_name", (String)input_file.getName()); 
 
 		
 		return value; 
 	}
 	
+	public SBOLDocument retrieveDoc() throws SynBioHubException {
+		return hub.getSBOL(config.get_TP_col()); 
+	}
+	
+	public SBOLDocument retrieveEmulated() throws SynBioHubException, SBOLValidationException, URISyntaxException {
+		String newPrefix = "https://synbiohub.utah.edu/user/" + config.get_user() + "/" + config.get_id() + "/";
+		
+		//attempt to emulate the changes 
+		doc = emulator(doc, newPrefix, config.get_TP_col());
+		doc = ack_changes(doc, retrieveDoc(), newPrefix, config.get_TP_col());
+		return doc;
+	}
+	
+	public String retreiveInputFile() {
+		return (String)input_file.getName();
+	}
 
 	private SBOLDocument ack_changes(SBOLDocument doc, SBOLDocument retrievedDoc, String newPrefix, URI topLevelURI) throws SBOLValidationException {
 		
@@ -214,7 +230,7 @@ public class SynBioHubEmulator {
 		File f = new File(SynBioHubEmulator.class.getResource(settings_file).toURI());
 		InputStream is = new FileInputStream(f);
 		String jsonTxt = IOUtils.toString(is, "UTF-8");
-		JSONObject json = JSONObject.fromString(jsonTxt);       
+		JSONObject json = JSONObject.fromObject(jsonTxt);       
 
 		String url = json.getString( "url" );
 		String prefix = json.getString( "prefix" );

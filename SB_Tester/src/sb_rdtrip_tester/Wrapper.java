@@ -38,10 +38,10 @@ public class Wrapper {
 			try{
 				emulator = new SynBioHubEmulator(f, args[0]); 
 
-				JSONObject output = emulator.retrieve(); 
-				String orig_file = output.getString("orig_file_name");
-				SBOLDocument emulated = (SBOLDocument) output.get("Emulated");
-				SBOLDocument retrieved = (SBOLDocument) output.get("Retrieved");
+				//JSONObject output = emulator.retrieve(); 
+				String orig_file = emulator.retreiveInputFile(); //output.getString("orig_file_name");
+				SBOLDocument emulated = emulator.retrieveEmulated(); //(SBOLDocument) output.get("Emulated");
+				SBOLDocument retrieved = emulator.retrieveDoc(); //(SBOLDocument) output.get("Retrieved");
 
 				retrieved.write("Retrieved/" + orig_file + "_Retrieved.xml");
 				emulated.write("Emulated/" + orig_file + "_Emulated.xml");
@@ -50,6 +50,14 @@ public class Wrapper {
 				//wrapper.writeEmulated(orig_file + "_Emulated.xml", emulated); 
 
 				wrapper.compare(orig_file, emulated, retrieved); 
+				if (SBOLValidate.getNumErrors()!=0) {
+					for (String error : SBOLValidate.getErrors()) {
+						System.err.println(error);
+					}
+					System.err.println("Fail");
+				} else {
+					System.err.println("Success");
+				}
 			}
 			catch (SBOLValidationException e) {
 				e.printStackTrace();
@@ -66,14 +74,6 @@ public class Wrapper {
 			catch (URISyntaxException e) {
 				e.printStackTrace();
 				System.err.println("Fail");
-			}
-			if (SBOLValidate.getNumErrors()!=0) {
-				for (String error : SBOLValidate.getErrors()) {
-					System.err.println(error);
-				}
-				System.err.println("Fail");
-			} else {
-				System.out.println("Success");
 			}
 		}
 		System.setErr(null);
