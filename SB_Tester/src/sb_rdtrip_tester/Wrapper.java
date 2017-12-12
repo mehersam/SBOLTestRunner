@@ -29,7 +29,8 @@ public class Wrapper {
 	
 		for(File f : wrapper.run("all"))
 		{
-			if (f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/labhost")) continue;
+			// TODO: use this to avoid slow labhost files
+			//if (f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/labhost")) continue;
 		
 			System.out.println(f.getAbsolutePath());
 			fs = new FileOutputStream("Compared/" + f.getName().substring(0, f.getName().length()-4) + "_file_comparisonErrors.txt"); 
