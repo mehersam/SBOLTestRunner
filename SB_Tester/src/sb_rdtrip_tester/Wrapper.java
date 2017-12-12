@@ -29,6 +29,8 @@ public class Wrapper {
 	
 		for(File f : wrapper.run("all"))
 		{
+			if (f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/labhost")) continue;
+		
 			System.out.println(f.getAbsolutePath());
 			fs = new FileOutputStream("Compared/" + f.getName().substring(0, f.getName().length()-4) + "_file_comparisonErrors.txt"); 
 			bs = new BufferedOutputStream(fs);
@@ -40,8 +42,8 @@ public class Wrapper {
 
 				//JSONObject output = emulator.retrieve(); 
 				String orig_file = emulator.retreiveInputFile(); //output.getString("orig_file_name");
-				SBOLDocument emulated = emulator.retrieveEmulated(); //(SBOLDocument) output.get("Emulated");
 				SBOLDocument retrieved = emulator.retrieveDoc(); //(SBOLDocument) output.get("Retrieved");
+				SBOLDocument emulated = emulator.retrieveEmulated(); //(SBOLDocument) output.get("Emulated");
 
 				retrieved.write("Retrieved/" + orig_file + "_Retrieved.xml");
 				emulated.write("Emulated/" + orig_file + "_Emulated.xml");

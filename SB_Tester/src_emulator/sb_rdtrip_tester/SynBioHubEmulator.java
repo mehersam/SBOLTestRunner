@@ -13,6 +13,8 @@ import javax.xml.namespace.QName;
 
 import org.sbolstandard.core2.Annotation;
 import org.sbolstandard.core2.Collection;
+import org.sbolstandard.core2.Component;
+import org.sbolstandard.core2.ComponentDefinition;
 import org.sbolstandard.core2.Identified;
 import org.sbolstandard.core2.Model;
 import org.sbolstandard.core2.SBOLConversionException;
@@ -27,6 +29,7 @@ public class SynBioHubEmulator {
 
 	private SynBioHubFrontend hub;
 	private SBOLDocument doc;
+	private SBOLDocument retrievedDoc;
 	private Config config; //this needs an empty constructor with some default values i.e prefix, etc..?
 	private File input_file; 
 	public SynBioHubEmulator(File read_file, String settings_file) throws SBOLValidationException, IOException, SBOLConversionException,
@@ -43,7 +46,7 @@ public class SynBioHubEmulator {
 		// submit document to SB
 		hub.submit(config.get_id(), config.get_version(), config.get_name(), config.get_desc(), "", "", "1", doc);
 
-		//retrieve(config.get_TP_col(), read_file.getName());
+		retrievedDoc = hub.getSBOL(config.get_TP_col());
 
 	}
 
@@ -73,11 +76,11 @@ public class SynBioHubEmulator {
 	}
 	
 	public SBOLDocument retrieveDoc() throws SynBioHubException {
-		return hub.getSBOL(config.get_TP_col()); 
+		return retrievedDoc; 
 	}
 	
 	public SBOLDocument retrieveEmulated() throws SynBioHubException, SBOLValidationException, URISyntaxException {
-		String newPrefix = "https://synbiohub.utah.edu/user/" + config.get_user() + "/" + config.get_id() + "/";
+		String newPrefix = config.get_prefix() + "/user/" + config.get_user() + "/" + config.get_id() + "/";
 		
 		//attempt to emulate the changes 
 		doc = emulator(doc, newPrefix, config.get_TP_col());
@@ -107,22 +110,28 @@ public class SynBioHubEmulator {
 		for(Model m : retrievedDoc.getModels())
 		{
 			URI source = m.getSource();
-			Model retrieved_Model = doc.getModel(m.getDisplayId(), m.getVersion());
-			retrieved_Model.setSource(source);
+			Model doc_Model = doc.getModel(m.getDisplayId(), m.getVersion());
+			doc_Model.setSource(source);
 		}
 		
-		return retrievedDoc;
+		return doc;
 	}
 
 	private SBOLDocument emulator(SBOLDocument doc, String newPrefix, URI topLevelURI)
 			throws SBOLValidationException, URISyntaxException {
-
-		// CHANGE 1: change URI prefix
+		
+		// CHANGE 0: copy into dummy namespace first
+		SBOLDocument doc2 = new SBOLDocument();
+		doc2.setDefaultURIprefix("http://dummy.org/");
+		doc2.createCopy(doc);
+		doc = doc2;
+		
+		// CHANGE 1: change URI prefix		
 		doc = doc.changeURIPrefixVersion(newPrefix, "1");
 		doc.setDefaultURIprefix(newPrefix);
 
 		// CHANGE 2: add owned by annotation to Collection
-		String ownedByURI = "https://synbiohub.utah.edu/user/" + config.get_user();
+		String ownedByURI = config.get_prefix() + "/user/" + config.get_user();
 
 		// CHANGE 4: add top level collection
 		Collection c = doc.createCollection("Tester_1_collection", "1");
@@ -131,7 +140,7 @@ public class SynBioHubEmulator {
 		String description = config.get_desc();
 		c.setName(name);
 		c.setDescription(description);
-		c.createAnnotation(new QName("http://purl.org/dc/elements/1.1/", "creator", "dc"), "Meher");
+		c.createAnnotation(new QName("http://purl.org/dc/elements/1.1/", "creator", "dc"), config.get_creator());
 	
 		for (TopLevel tp : doc.getTopLevels()) {
 			if (!tp.getIdentity().equals(c.getIdentity()))
@@ -170,7 +179,7 @@ public class SynBioHubEmulator {
 			}
 
 		}).visitDocument(doc);
-
+		
 		return doc;
 
 	}
@@ -237,6 +246,7 @@ public class SynBioHubEmulator {
 		String email = json.getString( "email" );
 		String pass = json.getString( "pass" );
 		String user = json.getString("user");
+		String creator = json.getString("creator");
 		String id = json.getString( "id" );
 		String version = json.getString( "version" );
 		String name = json.getString( "name" );
@@ -245,7 +255,7 @@ public class SynBioHubEmulator {
 		boolean complete = json.getBoolean("complete"); 
 		boolean create_defaults = json.getBoolean("create_defaults"); 
 
-		return new Config(url, prefix, email, pass, user, id, version, name, desc, TP_collection, complete, create_defaults); 
+		return new Config(url, prefix, email, pass, user, creator, id, version, name, desc, TP_collection, complete, create_defaults); 
 
 	}
 }
