@@ -120,12 +120,6 @@ public class SynBioHubEmulator {
 	private SBOLDocument emulator(SBOLDocument doc, String newPrefix, URI topLevelURI)
 			throws SBOLValidationException, URISyntaxException {
 		
-		// CHANGE 0: copy into dummy namespace first
-		SBOLDocument doc2 = new SBOLDocument();
-		doc2.setDefaultURIprefix("http://dummy.org/");
-		doc2.createCopy(doc);
-		doc = doc2;
-		
 		// CHANGE 1: change URI prefix		
 		doc = doc.changeURIPrefixVersion(newPrefix, "1");
 		doc.setDefaultURIprefix(newPrefix);
