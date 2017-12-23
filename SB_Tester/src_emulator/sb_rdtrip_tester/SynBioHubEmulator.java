@@ -13,8 +13,6 @@ import javax.xml.namespace.QName;
 
 import org.sbolstandard.core2.Annotation;
 import org.sbolstandard.core2.Collection;
-import org.sbolstandard.core2.Component;
-import org.sbolstandard.core2.ComponentDefinition;
 import org.sbolstandard.core2.Identified;
 import org.sbolstandard.core2.Model;
 import org.sbolstandard.core2.SBOLConversionException;
@@ -44,7 +42,7 @@ public class SynBioHubEmulator {
 		create_design(config.get_prefix(), input_file, config.get_complete(), config.get_defaults());
 
 		// submit document to SB
-		hub.submit(config.get_id(), config.get_version(), config.get_name(), config.get_desc(), "", "", "1", doc);
+		hub.createCollection(config.get_id(), config.get_version(), config.get_name(), config.get_desc(), "", true, doc);
 
 		retrievedDoc = hub.getSBOL(config.get_TP_col());
 
