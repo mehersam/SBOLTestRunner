@@ -14,6 +14,7 @@ import javax.xml.namespace.QName;
 import org.sbolstandard.core2.Annotation;
 import org.sbolstandard.core2.Collection;
 import org.sbolstandard.core2.Identified;
+import org.sbolstandard.core2.IdentifiedVisitor;
 import org.sbolstandard.core2.Model;
 import org.sbolstandard.core2.SBOLConversionException;
 import org.sbolstandard.core2.SBOLDocument;
@@ -117,6 +118,15 @@ public class SynBioHubEmulator {
 
 	private SBOLDocument emulator(SBOLDocument doc, String newPrefix, URI topLevelURI)
 			throws SBOLValidationException, URISyntaxException {
+
+		// CHANGE 0: remove objects found in WebOfRegistries
+		for (TopLevel tp : doc.getTopLevels()) {
+			// TODO: should replace with webOfRegistries
+			if (tp.getIdentity().toString().startsWith("https://synbiohub.utah.edu/") ||
+					tp.getIdentity().toString().startsWith("https://synbiohub.org/")) {
+				doc.removeTopLevel(tp);
+			}
+		}
 		
 		// CHANGE 1: change URI prefix	
 		doc.setDefaultURIprefix("http://dummy.org");
@@ -138,7 +148,6 @@ public class SynBioHubEmulator {
 		for (TopLevel tp : doc.getTopLevels()) {
 			if (!tp.getIdentity().equals(c.getIdentity()))
 				c.addMember(tp.getIdentity());
-
 		}
 
 		(new IdentifiedVisitor() {
@@ -159,9 +168,14 @@ public class SynBioHubEmulator {
 							topLevel.getIdentity());
 
 					String class_type = identified.getClass().toString().replace("class org.sbolstandard.core2.", "");
-					identified.createAnnotation(new QName("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "type", "rdf"),
-							new URI("http://sbols.org/v2#" + class_type));
-
+					if (class_type.equals("Activity") || class_type.equals("Usage") || class_type.equals("Association") ||
+							class_type.equals("Agent") || class_type.equals("Plan")) {
+						identified.createAnnotation(new QName("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "type", "rdf"),
+								new URI("http://www.w3.org/ns/prov#" + class_type));
+					} else {
+						identified.createAnnotation(new QName("http://www.w3.org/1999/02/22-rdf-syntax-ns#", "type", "rdf"),
+								new URI("http://sbols.org/v2#" + class_type));
+					}
 					// System.out.println(tp.getClass());
 
 				} catch (SBOLValidationException e) {
