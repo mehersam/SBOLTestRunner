@@ -56,7 +56,7 @@ public class SynBioHubEmulator {
 		
 		//retrievedDoc.write("Retrieved/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
 
-		String newPrefix = "https://synbiohub.utah.edu/user/" + config.get_user() + "/" + config.get_id() + "/";
+		String newPrefix = config.get_prefix() + "/user/" + config.get_user() + "/" + config.get_id() + "/";
 		
 		//attempt to emulate the changes 
 		doc = emulator(doc, newPrefix, config.get_TP_col());

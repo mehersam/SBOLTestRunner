@@ -31,6 +31,7 @@ public class Wrapper {
 		{
 			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/labhost_All")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("_orig.xml")) continue;
+			//if (!f.getAbsoluteFile().toString().endsWith("Final_TASBE.xml")) continue;
 		
 			System.out.println(f.getAbsolutePath());
 			fs = new FileOutputStream("Compared/" + f.getName().substring(0, f.getName().length()-4) + "_file_comparisonErrors.txt"); 
@@ -78,12 +79,11 @@ public class Wrapper {
 				e.printStackTrace();
 				System.err.println("Fail");
 			}
+			fs.close();
+			bs.close();
+			printStream.close();
 		}
 		System.setErr(null);
-		fs.close();
-		bs.close();
-		printStream.close();
-
 	}
 
 }
