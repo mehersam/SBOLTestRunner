@@ -29,7 +29,7 @@ public class Wrapper {
 	
 		for(File f : wrapper.run("all"))
 		{
-			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/labhost_All")) continue;
+			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/SBOL1")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("_orig.xml")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("Final_TASBE.xml")) continue;
 		
@@ -55,10 +55,17 @@ public class Wrapper {
 
 				wrapper.compare(orig_file, emulated, retrieved); 
 				if (SBOLValidate.getNumErrors()!=0) {
+					int errorCnt = 0;
 					for (String error : SBOLValidate.getErrors()) {
+						if (error.startsWith("Namespace")) continue;
 						System.err.println(error);
+						errorCnt++;
 					}
-					System.err.println("Fail");
+					if (errorCnt > 0) {
+						System.err.println("Fail");
+					} else {
+						System.err.println("Success");
+					}
 				} else {
 					System.err.println("Success");
 				}
