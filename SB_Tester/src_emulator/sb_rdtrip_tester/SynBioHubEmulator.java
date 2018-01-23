@@ -6,12 +6,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.commons.io.IOUtils;
 import net.sf.json.JSONObject; 
 import javax.xml.namespace.QName;
 
 import org.sbolstandard.core2.Annotation;
+import org.sbolstandard.core2.Attachment;
 import org.sbolstandard.core2.Collection;
 import org.sbolstandard.core2.Identified;
 import org.sbolstandard.core2.IdentifiedVisitor;
@@ -23,6 +25,7 @@ import org.sbolstandard.core2.SBOLValidationException;
 import org.sbolstandard.core2.TopLevel;
 import org.synbiohub.frontend.SynBioHubException;
 import org.synbiohub.frontend.SynBioHubFrontend;
+import org.synbiohub.frontend.WebOfRegistriesData;
 
 public class SynBioHubEmulator {
 
@@ -112,19 +115,27 @@ public class SynBioHubEmulator {
 			Model doc_Model = doc.getModel(m.getDisplayId(), m.getVersion());
 			doc_Model.setSource(source);
 		}
+		for(Attachment a : retrievedDoc.getAttachments())
+		{
+			URI source = a.getSource();
+			Attachment doc_Attachment = doc.getAttachment(a.getDisplayId(), a.getVersion());
+			doc_Attachment.setSource(source);
+		}
 		
 		return doc;
 	}
 
 	private SBOLDocument emulator(SBOLDocument doc, String newPrefix, URI topLevelURI)
-			throws SBOLValidationException, URISyntaxException {
+			throws SBOLValidationException, URISyntaxException, SynBioHubException {
 
 		// CHANGE 0: remove objects found in WebOfRegistries
+		ArrayList<WebOfRegistriesData> webOfRegistries = SynBioHubFrontend.getRegistries();
+		
 		for (TopLevel tp : doc.getTopLevels()) {
-			// TODO: should replace with webOfRegistries
-			if (tp.getIdentity().toString().startsWith("https://synbiohub.utah.edu/") ||
-					tp.getIdentity().toString().startsWith("https://synbiohub.org/")) {
-				doc.removeTopLevel(tp);
+			for (WebOfRegistriesData registry : webOfRegistries) {
+				if (tp.getIdentity().toString().startsWith(registry.getUriPrefix())) {
+					doc.removeTopLevel(tp);
+				}
 			}
 		}
 		
@@ -186,6 +197,14 @@ public class SynBioHubEmulator {
 			}
 
 		}).visitDocument(doc);
+		
+		for (WebOfRegistriesData registry : webOfRegistries) {
+			doc.addRegistry(registry.getInstanceUrl(),registry.getUriPrefix());
+		}
+		//completeDocument(doc);
+		for (TopLevel topLevel : doc.getTopLevels()) {
+			doc.createRecursiveCopy(doc,topLevel);
+		}
 		
 		return doc;
 
