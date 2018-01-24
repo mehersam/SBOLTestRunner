@@ -141,7 +141,7 @@ public class SynBioHubEmulator {
 		
 		// CHANGE 1: change URI prefix	
 		doc.setDefaultURIprefix("http://dummy.org");
-		doc = doc.changeURIPrefixVersion(newPrefix, "1");
+		doc = doc.changeURIPrefixVersion(newPrefix, null, "1");
 		doc.setDefaultURIprefix(newPrefix);
 
 		// CHANGE 2: add owned by annotation to Collection
