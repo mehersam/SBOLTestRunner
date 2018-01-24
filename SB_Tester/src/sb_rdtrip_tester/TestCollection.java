@@ -34,10 +34,10 @@ public class TestCollection {
 	{
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol2()); 
-		//sbol_files.addAll(sbol1()); 
-		//sbol_files.addAll(gb()); 
-		//sbol_files.addAll(invalidFiles()); 
-		//sbol_files.addAll(rdf()); 
+		sbol_files.addAll(sbol1()); 
+		sbol_files.addAll(gb()); 
+		sbol_files.addAll(invalidFiles()); 
+		sbol_files.addAll(rdf()); 
 		return sbol_files; 
 	}
 	

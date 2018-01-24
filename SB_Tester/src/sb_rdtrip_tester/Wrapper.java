@@ -16,7 +16,8 @@ public class Wrapper {
 
 	public static void main(String[] args) throws Exception {
 		
-		SBOLTestRunner wrapper = new SBOLTestRunner();
+		SBOLTestRunner wrapper = new SBOLTestRunner("sbol2");
+		int sizeOfTestSuite = wrapper.getSizeOfTestSuite();
 		SynBioHubEmulator emulator; 
 		FileOutputStream fs = null; 
 		BufferedOutputStream bs = null;
@@ -26,14 +27,16 @@ public class Wrapper {
 		{
 			new File("Compared/").mkdir();
 		}
-	
-		for(File f : wrapper.run("all"))
+			
+		int i = 0;
+		int success = 0;
+		int fail = 0;
+		for(File f : wrapper.getTestFiles())
 		{
-			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/SBOL1")) continue;
+			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/CreateAndRemoveComponentDefinition")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("_orig.xml")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("Final_TASBE.xml")) continue;
-		
-			System.out.println(f.getAbsolutePath());
+			i++;
 			fs = new FileOutputStream("Compared/" + f.getName().substring(0, f.getName().length()-4) + "_file_comparisonErrors.txt"); 
 			bs = new BufferedOutputStream(fs);
 			printStream = new PrintStream(bs, true);
@@ -62,28 +65,42 @@ public class Wrapper {
 						errorCnt++;
 					}
 					if (errorCnt > 0) {
+						fail++;
+						System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Fail "+fail);
 						System.err.println("Fail");
 					} else {
+						success++;
+						System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Success "+success);
 						System.err.println("Success");
 					}
 				} else {
+					success++;
+					System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Success "+success);
 					System.err.println("Success");
 				}
 			}
 			catch (SBOLValidationException e) {
-				e.printStackTrace();
+				fail++;
+				System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Fail "+fail);
+				e.printStackTrace(System.err);
 				System.err.println("Fail");
 			}
 			catch (SBOLConversionException e) {
-				e.printStackTrace();
+				fail++;
+				System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Fail "+fail);
+				e.printStackTrace(System.err);
 				System.err.println("Fail");
 			}
 			catch (SynBioHubException e) {
-				e.printStackTrace();
+				fail++;
+				System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Fail "+fail);
+				e.printStackTrace(System.err);
 				System.err.println("Fail");
 			}
 			catch (URISyntaxException e) {
-				e.printStackTrace();
+				fail++;
+				System.out.println(i+" of "+sizeOfTestSuite+": "+ f.getName()+" Fail "+fail);
+				e.printStackTrace(System.err);
 				System.err.println("Fail");
 			}
 			fs.close();

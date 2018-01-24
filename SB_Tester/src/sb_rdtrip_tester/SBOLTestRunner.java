@@ -10,10 +10,13 @@ import org.sbolstandard.core2.SBOLValidate;
 public class SBOLTestRunner {
 
 	private TestCollection testCollection; 
+	private Collection<File> sbol_files;
 	
-	public SBOLTestRunner() throws Exception
+	public SBOLTestRunner(String collection_type) throws Exception
 	{
 		initialize_results(); 
+		testCollection = new TestCollection(); 
+		sbol_files = testCollection.get_Collection(collection_type);  //for the set of files, pass it into Emulator	
 	}
 	
 	public void initialize_results()
@@ -39,10 +42,12 @@ public class SBOLTestRunner {
 
 	}
 	
-	public Collection<File> run(String collection_type) throws Exception
+	public int getSizeOfTestSuite() {
+		return sbol_files.size();
+	}
+	
+	public Collection<File> getTestFiles() throws Exception
 	{
-		testCollection = new TestCollection(); 
-		Collection<File> sbol_files = testCollection.get_Collection(collection_type);  //for the set of files, pass it into Emulator	
 		return sbol_files;
 	}
 	
