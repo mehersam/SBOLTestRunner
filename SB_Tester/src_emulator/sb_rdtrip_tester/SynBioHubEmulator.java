@@ -34,66 +34,59 @@ public class SynBioHubEmulator {
 	private SBOLDocument retrievedDoc;
 	private Config config; //this needs an empty constructor with some default values i.e prefix, etc..?
 	private File input_file; 
+
 	public SynBioHubEmulator(File read_file, String settings_file) throws SBOLValidationException, IOException, SBOLConversionException,
 			SynBioHubException, URISyntaxException {
 		
 		input_file = read_file; 
 		config = parse_JSON(settings_file); //read in settings file
 		
-		hub = new SynBioHubFrontend(config.get_url(), config.get_prefix());
-		login(config.get_email(), config.get_pass());
+		//create an instance of SBH and login
+		if(initialize_SBH_Frontend(config.get_url(), config.get_prefix(), config.get_email(), config.get_pass()))
+		{
+			//read in the input file as an SBOLDocument to submit to SBH
+			create_design(config.get_prefix(), input_file, config.get_complete(), config.get_defaults());
+			
+			// submit document to SBH
+			hub.createCollection(config.get_id(), config.get_version(), config.get_name(), config.get_desc(), "", true, doc);
+
+			//retrieve uploaded document from SBH
+			retrievedDoc = hub.getSBOL(config.get_TP_col());
+		}
 		
-		create_design(config.get_prefix(), input_file, config.get_complete(), config.get_defaults());
-
-		// submit document to SB
-		hub.createCollection(config.get_id(), config.get_version(), config.get_name(), config.get_desc(), "", true, doc);
-
-		retrievedDoc = hub.getSBOL(config.get_TP_col());
-
-	}
-
-	public JSONObject retrieve()
-			throws SynBioHubException, IOException, SBOLConversionException, URISyntaxException, SBOLValidationException {
-				
-		SBOLDocument retrievedDoc = new SBOLDocument();
-		retrievedDoc = hub.getSBOL(config.get_TP_col()); //get the SBOLDocument back
-		
-		//retrievedDoc.write("Retrieved/" + retrieved_doc_file_name + "_Retrieved.xml"); //write to new file
-
-		String newPrefix = config.get_prefix() + "/user/" + config.get_user() + "/" + config.get_id() + "/";
-		
-		//attempt to emulate the changes 
-		doc = emulator(doc, newPrefix, config.get_TP_col());
-		doc = ack_changes(doc, retrievedDoc, newPrefix, config.get_TP_col());
-		//doc.write("Emulated/" + retrieved_doc_file_name + "_Emulated.xml");
-
-		//SBOLValidate.compareDocuments(orig_file + "_Emulated", doc, orig_file + "_Retrieved", retrievedDoc);
-		 JSONObject value = new JSONObject();
-	        value.put("Retrieved", retrievedDoc);
-	        value.put("Emulated", doc);
-	        value.put("orig_file_name", (String)input_file.getName()); 
-
-		
-		return value; 
 	}
 	
-	public SBOLDocument retrieveDoc() throws SynBioHubException {
+	/*
+	 * Retrieves the input file from SynBioHub
+	 * 
+	 * @return SBOLDocument : the retrieved SBOLDocument
+	 * 
+	 */
+	public SBOLDocument retrieveDoc() throws SynBioHubException {	
 		return retrievedDoc; 
 	}
 	
-	public SBOLDocument retrieveEmulated() throws SynBioHubException, SBOLValidationException, URISyntaxException {
+	public String retrieveInputFile() {
+		return (String)input_file.getName();
+	}
+
+	/*
+	 * Emulates and acknowledges changes to the input file
+	 * 
+	 * @return SBOLDocument : the emulated SBOLDocument
+	 * 
+	 */
+	public SBOLDocument retrieveEmulatedDoc() throws SynBioHubException, SBOLValidationException, URISyntaxException {
 		String newPrefix = config.get_prefix() + "/user/" + config.get_user() + "/" + config.get_id() + "/";
 		
 		//attempt to emulate the changes 
 		doc = emulator(doc, newPrefix, config.get_TP_col());
 		doc = ack_changes(doc, retrieveDoc(), newPrefix, config.get_TP_col());
+		
 		return doc;
 	}
 	
-	public String retreiveInputFile() {
-		return (String)input_file.getName();
-	}
-
+	
 	private SBOLDocument ack_changes(SBOLDocument doc, SBOLDocument retrievedDoc, String newPrefix, URI topLevelURI) throws SBOLValidationException {
 		
 		// CHANGE 3: add timestamp of uploaded document
@@ -232,11 +225,13 @@ public class SynBioHubEmulator {
 	 *            - pass of account to login into
 	 * @return
 	 */
-	private boolean login(String email, String pass) {
-		// login info
+	private boolean initialize_SBH_Frontend(String url, String prefix, String email, String pass) {
+		
 		try {
+			hub = new SynBioHubFrontend(url, prefix);		
 			hub.login(email, pass);
 		} catch (SynBioHubException e) {
+			System.err.println("\nERROR: Could not login into SBH.\n");
 			e.printStackTrace();
 			return false;
 		}
