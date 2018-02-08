@@ -36,7 +36,7 @@ public class SynBioHubRunner {
 		
 		try {
 			SynBioHubEmulator emulator = new SynBioHubEmulator(read_file, settings_file);
-			String orig_file_name = orig_file.substring(0, orig_file.length()-4);
+			String orig_file_name = read_file.getName().substring(0, read_file.getName().length()-4);
 			try {
 				retrieved = emulator.retrieveDoc(); 
 				retrieved.write(retrieved_file_path + "/" + orig_file_name + "_retrieved.xml");
