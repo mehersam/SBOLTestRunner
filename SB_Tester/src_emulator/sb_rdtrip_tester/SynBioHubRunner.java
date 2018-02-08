@@ -33,7 +33,6 @@ public class SynBioHubRunner {
 		if(settings_file == null)
 			System.err.println("Settings file could not be read in.\n"); 
 		
-		
 		try {
 			SynBioHubEmulator emulator = new SynBioHubEmulator(read_file, settings_file);
 			String orig_file_name = read_file.getName().substring(0, read_file.getName().length()-4);
@@ -50,6 +49,7 @@ public class SynBioHubRunner {
 			System.err.println("SBH Emulator failed to initalize" + e.getMessage() + "\n"); 
 			e.printStackTrace();
 		}
+		
+		System.out.println("Finished."); 
 	}
-
 }
