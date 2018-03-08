@@ -14,7 +14,7 @@ public class SBOLTestRunner {
 	
 	public SBOLTestRunner(String collection_type) throws Exception
 	{
-		initialize_results(); 
+		//initialize_results(); 
 		testCollection = new TestCollection(); 
 		sbol_files = testCollection.get_Collection(collection_type);  //for the set of files, pass it into Emulator	
 	}
