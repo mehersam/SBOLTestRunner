@@ -17,17 +17,29 @@ import net.sf.json.JSONObject;
 
 public class SBOLTestRunner {
 
+	private static String tester_cmd = "";
+	private static String emulated_file_path = "";
+	private static String retrieved_file_path = "";
+	
 	public static void main(String[] args) throws Exception {
 
-		if (args.length != 3) {
+		if (args.length > 4) {
 			System.err.println(
-					"Please provide the test runner program command, path location of the emulated and retrieved files.");
+					"Please provide the test program command, path location of the emulated and retrieved files.");
 			System.exit(1);
+		} else if (args.length == 4) {
+			if (args[1].equals("-e")) {
+				tester_cmd = args[0];
+				emulated_file_path = args[2];
+				retrieved_file_path = args[3];
+			}
 		}
-
-		String test_runner_cmd = args[0];
-		String emulated_file_path = args[1];
-		String retrieved_file_path = args[2];
+		else if(args.length == 3)
+		{
+			tester_cmd = args[0];
+			emulated_file_path = args[1];
+			retrieved_file_path = args[2];
+		}
 
 		if (!new File(emulated_file_path).exists() && !new File(emulated_file_path).isDirectory()) {
 			new File(emulated_file_path).mkdir();
@@ -58,14 +70,14 @@ public class SBOLTestRunner {
 			printStream = new PrintStream(bs, true);
 			System.setErr(printStream);
 
-			try {	
-				String filename = f.getName().substring(0, f.getName().length()-4); 
+			try {
+				String filename = f.getName().substring(0, f.getName().length() - 4);
 				String emulated_full_fp = emulated_file_path + filename + "_emulated.xml";
 				String retrieved_full_fp = retrieved_file_path + filename + "_retrieved.xml";
 
 				Process test_runner = null;
 				try {
-					test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", test_runner_cmd,
+					test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
 							f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
 					test_runner.waitFor(); // wait for the runner to finish
 											// running
@@ -83,10 +95,10 @@ public class SBOLTestRunner {
 					System.err.println(e.getStackTrace());
 
 				}
-				
-				File emulated_File = new File(emulated_full_fp); 
-				File retrieved_File = new File(retrieved_full_fp); 
-				
+
+				File emulated_File = new File(emulated_full_fp);
+				File retrieved_File = new File(retrieved_full_fp);
+
 				SBOLDocument emulated = SBOLReader.read(emulated_File);
 				SBOLDocument retrieved = SBOLReader.read(retrieved_File);
 
@@ -98,8 +110,8 @@ public class SBOLTestRunner {
 				emulatorErrorCnt++;
 				System.err.println(emulatorErrorCnt);
 
-
 				wrapper.compare(f.getName(), emulated, retrieved);
+
 				if (SBOLValidate.getNumErrors() != 0) {
 					int errorCnt = 0;
 					for (String error : SBOLValidate.getErrors()) {
