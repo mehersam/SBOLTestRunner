@@ -43,13 +43,11 @@ public class TestCollection {
 	
 	private Collection<File> sbol2()
 	{
-		//what I need is to pass into the emulator each test file. for each subdirectory. 
-		//load in all the testfiles and ask for each one separately? 
 		
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("SBOLTestSuite/SBOL2/").toURI());
+			file_base = new File(TestCollection.class.getResource("../SBOLTestSuite/SBOL2/").toURI());
 		}
 		catch (URISyntaxException e1) {
 			e1.printStackTrace();
@@ -57,14 +55,12 @@ public class TestCollection {
 		for (File f : file_base.listFiles()) {
 			sbol_files.add(f);
 		}
-		
 		return sbol_files;
 	}
 	
 	private Collection<File> sbol1()
 	{
-		//what I need is to pass into the emulator each test file. for each subdirectory. 
-		//load in all the testfiles and ask for each one separately? 
+	
 		
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
@@ -82,10 +78,7 @@ public class TestCollection {
 	}
 	
 	private Collection<File> gb()
-	{
-		//what I need is to pass into the emulator each test file. for each subdirectory. 
-		//load in all the testfiles and ask for each one separately? 
-		
+	{	
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
@@ -103,9 +96,6 @@ public class TestCollection {
 	
 	private Collection<File> invalidFiles()
 	{
-		//what I need is to pass into the emulator each test file. for each subdirectory. 
-		//load in all the testfiles and ask for each one separately? 
-		
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
@@ -123,8 +113,6 @@ public class TestCollection {
 	
 	private Collection<File> rdf()
 	{
-		//what I need is to pass into the emulator each test file. for each subdirectory. 
-		//load in all the testfiles and ask for each one separately? 
 		
 		File file_base = null ;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
