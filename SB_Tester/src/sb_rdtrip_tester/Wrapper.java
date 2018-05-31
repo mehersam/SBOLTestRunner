@@ -33,7 +33,7 @@ public class Wrapper {
 		int fail = 0;
 		for(File f : wrapper.getTestFiles())
 		{
-			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/CreateAndRemoveComponentDefinition")) continue;
+			//if (!f.getAbsoluteFile().toString().startsWith("/Users/myers/git/SBOLTestRunner/SB_Tester/target/classes/sb_rdtrip_tester/SBOLTestSuite/SBOL2/design")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("_orig.xml")) continue;
 			//if (!f.getAbsoluteFile().toString().endsWith("Final_TASBE.xml")) continue;
 			i++;
