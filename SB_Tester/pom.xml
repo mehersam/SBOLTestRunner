@@ -13,10 +13,11 @@
 			<version>2.4</version>
 			<classifier>jdk15</classifier>
 		</dependency>
-		<dependency>
+			<dependency>
 			<groupId>org.sbolstandard</groupId>
 			<artifactId>libSBOLj</artifactId>
-			<version>libSBOLj-2.2.1-withDependencies</version>
+			<version>2.3.2-SNAPSHOT</version>
+			<scope>compile</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

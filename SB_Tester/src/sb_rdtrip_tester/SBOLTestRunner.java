@@ -1,6 +1,7 @@
 package sb_rdtrip_tester;
 
 import java.io.BufferedOutputStream;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -9,7 +10,6 @@ import java.net.URISyntaxException;
 import org.sbolstandard.core2.SBOLConversionException;
 import org.sbolstandard.core2.SBOLDocument;
 import org.sbolstandard.core2.SBOLReader;
-import org.sbolstandard.core2.SBOLReaderTest;
 import org.sbolstandard.core2.SBOLValidate;
 import org.sbolstandard.core2.SBOLValidationException;
 import org.synbiohub.frontend.SynBioHubException;
