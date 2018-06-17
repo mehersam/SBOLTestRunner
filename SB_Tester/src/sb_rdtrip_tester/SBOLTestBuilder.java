@@ -42,7 +42,7 @@ public class SBOLTestBuilder {
 
 	}
 	
-	public int getSizeOfTestSuite() {
+	public int getSizeOfTestSuite() { 
 		return sbol_files.size();
 	}
 	

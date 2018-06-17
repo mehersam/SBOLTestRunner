@@ -22,7 +22,7 @@ public class SBOLTestRunner {
 	private static String retrieved_file_path = "";
 	private static boolean emulate = false;
 
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws Exception { 
 
 		if (args.length > 4 || args.length < 3) {
 			System.err.println(
@@ -185,6 +185,12 @@ public class SBOLTestRunner {
 				e.printStackTrace(System.err);
 				System.err.println("Fail");
 			} catch (SBOLConversionException e) {
+				fail++;
+				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
+				e.printStackTrace(System.err);
+				System.err.println("Fail");
+			}
+			catch (Exception e) {
 				fail++;
 				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 				e.printStackTrace(System.err);
