@@ -22,17 +22,15 @@ public class SBOLTestRunner {
 	private static String retrieved_file_path = "";
 	private static boolean emulate = false;
 
-	public static void main(String[] args) throws Exception { 
+	public static void main(String[] args) throws Exception {
 
-		if (args.length > 4 || args.length < 3) {
+		if (args.length != 3) {
 			System.err.println(
 					"Please provide the test program command, path location of the emulated and retrieved files.");
 			System.exit(1);
-		} else if (args.length == 3) {
-			if (args[0].equals("-e")) {
-				tester_cmd = args[1];
-				retrieved_file_path = args[2];
-			}
+		} else if (args[0].equals("-e")) {
+			tester_cmd = args[1];
+			retrieved_file_path = args[2];
 		} else {
 			emulate = true;
 
@@ -44,7 +42,6 @@ public class SBOLTestRunner {
 				new File(emulated_file_path).mkdir();
 			}
 		}
-		
 
 		if (!new File(retrieved_file_path).exists() && !new File(retrieved_file_path).isDirectory())
 
@@ -76,13 +73,13 @@ public class SBOLTestRunner {
 			try {
 				String filename = f.getName().substring(0, f.getName().length() - 4);
 				String retrieved_full_fp = retrieved_file_path + filename + "_retrieved.xml";
-				File retrieved_File =  null;
-				SBOLDocument retrieved = null; 
+				File retrieved_File = null;
+				SBOLDocument retrieved = null;
 				Process test_runner = null;
-				
+
 				if (emulate) {
 					String emulated_full_fp = emulated_file_path + filename + "_emulated.xml";
-		
+
 					try {
 						test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
 								f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
@@ -118,45 +115,42 @@ public class SBOLTestRunner {
 					System.err.println(emulatorErrorCnt);
 
 					wrapper.compare(f.getName(), emulated, retrieved);
-				}
-				else
-				{
-					try
-					{
-					test_runner = Runtime.getRuntime().exec(String.format("%s %s %s", tester_cmd,
-							f.getAbsolutePath(), retrieved_full_fp));
-					test_runner.waitFor(); // wait for the runner to finish
-											// running
+				} else {
+					try {
+						test_runner = Runtime.getRuntime()
+								.exec(String.format("%s %s %s", tester_cmd, f.getAbsolutePath(), retrieved_full_fp));
+						test_runner.waitFor(); // wait for the runner to finish
+												// running
 
-					if (test_runner.exitValue() != 0) {
-						InputStream err = test_runner.getErrorStream();
-						byte c[] = new byte[err.available()];
-						err.read(c, 0, c.length);
-						int emulatorErrorCnt = 0;
-						System.err.println(new String(c));
+						if (test_runner.exitValue() != 0) {
+							InputStream err = test_runner.getErrorStream();
+							byte c[] = new byte[err.available()];
+							err.read(c, 0, c.length);
+							int emulatorErrorCnt = 0;
+							System.err.println(new String(c));
+						}
+
+					} catch (Exception e) {
+						System.err.println("TestRunner failed to execute properly\n\n" + e.getMessage());
+						System.err.println(e.getStackTrace());
+
 					}
 
-				} catch (Exception e) {
-					System.err.println("TestRunner failed to execute properly\n\n" + e.getMessage());
-					System.err.println(e.getStackTrace());
+					retrieved_File = new File(retrieved_full_fp);
+					retrieved = SBOLReader.read(retrieved_File);
+					SBOLDocument inputFile = SBOLReader.read(f);
 
+					InputStream err = test_runner.getErrorStream();
+					byte c[] = new byte[err.available()];
+					err.read(c, 0, c.length);
+					int emulatorErrorCnt = 0;
+					System.err.println(new String(c));
+					emulatorErrorCnt++;
+					System.err.println(emulatorErrorCnt);
+
+					wrapper.compare(f.getName(), inputFile, retrieved);
 				}
 
-				retrieved_File = new File(retrieved_full_fp);
-				retrieved = SBOLReader.read(retrieved_File);
-				SBOLDocument inputFile = SBOLReader.read(f); 
-				
-				InputStream err = test_runner.getErrorStream();
-				byte c[] = new byte[err.available()];
-				err.read(c, 0, c.length);
-				int emulatorErrorCnt = 0;
-				System.err.println(new String(c));
-				emulatorErrorCnt++;
-				System.err.println(emulatorErrorCnt);
-
-				wrapper.compare(f.getName(), inputFile, retrieved);
-				}
-				
 				if (SBOLValidate.getNumErrors() != 0) {
 					int errorCnt = 0;
 					for (String error : SBOLValidate.getErrors()) {
@@ -189,8 +183,7 @@ public class SBOLTestRunner {
 				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 				e.printStackTrace(System.err);
 				System.err.println("Fail");
-			}
-			catch (Exception e) {
+			} catch (Exception e) {
 				fail++;
 				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 				e.printStackTrace(System.err);
