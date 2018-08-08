@@ -107,7 +107,7 @@
 						<manifest>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>sb_rdtrip_tester.SBOLTestRunner</mainClass>
+							<mainClass>org.sboltestrunner.SBOLTestRunner</mainClass>
 						</manifest>
 					</archive>
 				</configuration>
