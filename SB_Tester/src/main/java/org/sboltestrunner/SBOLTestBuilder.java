@@ -1,4 +1,4 @@
-package sb_rdtrip_tester;
+package org.sboltestrunner;
 
 import java.io.File;
 import java.io.IOException;
