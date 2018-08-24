@@ -25,24 +25,26 @@ public class SBOLTestRunner {
 	private static String compared_file_path = "";
 
 	private static boolean emulate = false;
-
+	private static String collection_type = "";
 	public static void main(String[] args) throws Exception {
 
-		if (args.length != 4) {
+		if (args.length != 5) {
 			System.err.println(
-					"Please provide the test program command, path location of the emulated, retrieved and compared files.");
+					"Please provide the test file types, test program command, path location of the emulated, retrieved and compared files.");
 			System.exit(1);
-		} else if (args[0].equals("-e")) {
-			tester_cmd = args[1];
-			retrieved_file_path = args[2];
-			compared_file_path = args[3]; 
+		} else if (args[1].equals("-e")) {
+			tester_cmd = args[2];
+			retrieved_file_path = args[3];
+			compared_file_path = args[4]; 
+			collection_type = args[0];
 		} else {
 			emulate = true;
 
-			tester_cmd = args[0];
-			emulated_file_path = args[1];
-			retrieved_file_path = args[2];
-			compared_file_path = args[3]; 
+			collection_type = args[0];
+			tester_cmd = args[1];
+			emulated_file_path = args[2];
+			retrieved_file_path = args[3];
+			compared_file_path = args[4]; 
 			
 			if (!new File(emulated_file_path).exists() && !new File(emulated_file_path).isDirectory()) {
 				new File(emulated_file_path).mkdir();
@@ -70,7 +72,7 @@ public class SBOLTestRunner {
 			FileUtils.cleanDirectory(new File(compared_file_path));
 		}
 
-		SBOLTestBuilder wrapper = new SBOLTestBuilder("sbol2");
+		SBOLTestBuilder wrapper = new SBOLTestBuilder(collection_type);
 		int sizeOfTestSuite = wrapper.getSizeOfTestSuite();
 		FileOutputStream fs = null;
 		BufferedOutputStream bs = null;
@@ -100,7 +102,8 @@ public class SBOLTestRunner {
 					try {
 						
 						/*FOR DEBUG  */
-						//System.out.println(String.format("%s %s %s %s", tester_cmd, f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+						System.out.println(String.format("%s %s %s %s", tester_cmd, f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+						
 						test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
 								f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
 						test_runner.waitFor(); // wait for the runner to finish

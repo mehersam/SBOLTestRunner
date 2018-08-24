@@ -34,25 +34,25 @@ public class TestCollection {
 	}
 
 	public Collection<File> get_Collection(String id) throws Exception {
-		if (id.equals("sbol2"))
+		if (id.equals("-s2"))
 			return sbol2();
-		else if (id.equals("sbol1"))
+		else if (id.equals("-s1"))
 			return sbol1();
-		else if (id.equals("gb"))
+		else if (id.equals("-gb"))
 			return gb();
-		else if (id.equals("invalid"))
+		else if (id.equals("-i"))
 			return invalidFiles();
-		else if (id.equals("rdf"))
+		else if (id.equals("-rdf"))
 			return rdf();
-		else if (id.equals("all"))
+		else if (id.equals("-all"))
 			return all();
-		else if(id.equals("structural"))
+		else if(id.equals("-s"))
 			return structural();
-		else if(id.equals("functional"))
+		else if(id.equals("-f"))
 			return functional();
-		else if(id.equals("auxillary"))
+		else if(id.equals("-a"))
 			return auxillary();
-		else if(id.equals("structAndFunc"))
+		else if(id.equals("-sf"))
 			return structAndFunc();
 		else
 			throw new Exception("Invalid id passed, cannot find Collection");
@@ -73,12 +73,23 @@ public class TestCollection {
 
 		File file_base = null;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
-		try {
-			// file_base = new File("./SBOLTestSute/SBOL2/");
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/SBOL2/").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
+		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2/");
+
+		for (File f : file_base.listFiles()) {
+			sbol_files.add(f);
 		}
+		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_ic/");
+
+		for (File f : file_base.listFiles()) {
+			sbol_files.add(f);
+		}
+		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_nc/");
+
+		for (File f : file_base.listFiles()) {
+			sbol_files.add(f);
+		}
+		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_bp/");
+
 		for (File f : file_base.listFiles()) {
 			sbol_files.add(f);
 		}
@@ -90,7 +101,7 @@ public class TestCollection {
 		File file_base = null;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/SBOL1/").toURI());
+			file_base = new File(TestCollection.class.getResource("src/test/resources/SBOLTestSuite/SBOL1/").toURI());
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
 		}
@@ -105,7 +116,7 @@ public class TestCollection {
 		File file_base = null;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/GenBank/").toURI());
+			file_base = new File(TestCollection.class.getResource("src/test/resources/SBOLTestSuite/Genbank/").toURI());
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
 		}
@@ -120,7 +131,7 @@ public class TestCollection {
 		File file_base = null;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/InvalidFiles/").toURI());
+			file_base = new File(TestCollection.class.getResource("src/test/resources/SBOLTestSuite/FASTA/").toURI());
 		} catch (URISyntaxException e1) {
 			e1.printStackTrace();
 		}
