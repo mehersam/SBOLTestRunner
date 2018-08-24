@@ -38,32 +38,6 @@ c. The command to run the application being tested
 d. The file path for where exported files will be retrieved from.
 e. The file path for where the imported and exported files will be compared.
 
-
-SIMPLE ROUND-TRIP
-=================================
-
-The SBOL TestRunner can be run through the command-line by using the following command: 
-
-  java -jar <jarFileName> -<collection_type> -e <application_cmd> <retrieved_file_path> <compared_file_path>
-
-a. <jarFileName> is the name of the SBOL TestRunner jar file downloaded
-b. -<collection_type> specifies the type of SBOL test files to test the application with
-
-The different collection types include: 
-
-	-s2 : the SBOL2 example files
-	-s1 : the SBOL1 example files
-	-gb : the GenBank example files
-	-i  : the invalid example files 
-	-s  : the examples files encoding structural SBOL data types
-	-f  : the examples files encoding functional SBOL data types
-	-a  : the examples files encoding auxillary SBOL data types
-	-sf  : the examples files encoding structural and functional SBOL data types
-	
-c. The command to run the application being tested
-d. The file path for where exported files will be retrieved from.
-e. The file path for where the imported and exported files will be compared.
-
 Extended ROUND-TRIP
 =================================
 
