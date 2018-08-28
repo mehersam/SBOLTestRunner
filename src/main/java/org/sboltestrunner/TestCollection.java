@@ -83,21 +83,6 @@ public class TestCollection {
 		for (File f : file_base.listFiles()) {
 			sbol_files.add(f);
 		}
-//		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_ic/");
-//
-//		for (File f : file_base.listFiles()) {
-//			sbol_files.add(f);
-//		}
-//		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_nc/");
-//
-//		for (File f : file_base.listFiles()) {
-//			sbol_files.add(f);
-//		}
-//		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_bp/");
-//
-//		for (File f : file_base.listFiles()) {
-//			sbol_files.add(f);
-//		}
 		return sbol_files;
 	}
 
