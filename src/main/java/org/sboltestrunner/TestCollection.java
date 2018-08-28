@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Stack;
 
 import org.sbolstandard.core2.Activity;
 import org.sbolstandard.core2.Association;
@@ -58,7 +59,8 @@ public class TestCollection {
 			throw new Exception("Invalid id passed, cannot find Collection");
 
 	}
-
+	
+	
 	private Collection<File> all() {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol2());
@@ -73,26 +75,29 @@ public class TestCollection {
 
 		File file_base = null;
 		java.util.Collection<File> sbol_files = new HashSet<File>();
-		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2/");
-
+		try {
+			file_base = new File(TestCollection.class.getResource("src/test/resources/SBOLTestSuite/SBOL2/").toURI());
+		} catch (URISyntaxException e1) {
+			e1.printStackTrace();
+		}
 		for (File f : file_base.listFiles()) {
 			sbol_files.add(f);
 		}
-		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_ic/");
-
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_nc/");
-
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_bp/");
-
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
+//		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_ic/");
+//
+//		for (File f : file_base.listFiles()) {
+//			sbol_files.add(f);
+//		}
+//		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_nc/");
+//
+//		for (File f : file_base.listFiles()) {
+//			sbol_files.add(f);
+//		}
+//		file_base = new File("src/test/resources/SBOLTestSuite/SBOL2_bp/");
+//
+//		for (File f : file_base.listFiles()) {
+//			sbol_files.add(f);
+//		}
 		return sbol_files;
 	}
 
