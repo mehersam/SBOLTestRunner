@@ -102,7 +102,7 @@ public class SBOLTestRunner {
 					try {
 						
 						/*FOR DEBUG  */
-						System.out.println(String.format("%s %s %s %s", tester_cmd, f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+						//System.out.println(String.format("%s %s %s %s", tester_cmd, f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
 						
 						test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
 								f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
@@ -191,13 +191,13 @@ public class SBOLTestRunner {
 						System.err.println("Fail");
 					} else {
 						success++;
-						//System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
+						System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
 						System.err.println("Success");
 					}
 				}
 				 else {
 					success++;
-					//System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
+					System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
 					System.err.println("Success");
 				}
 			} catch (SBOLValidationException e) {
