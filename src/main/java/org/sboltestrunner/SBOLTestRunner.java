@@ -4,6 +4,7 @@ import java.io.BufferedOutputStream;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.net.URISyntaxException;
@@ -19,58 +20,52 @@ import net.sf.json.JSONObject;
 
 public class SBOLTestRunner {
 
+	// required variables
 	private static String tester_cmd = "";
-	private static String emulated_file_path = "";
-	private static String retrieved_file_path = "";
 	private static String compared_file_path = "";
+	private static String retrieved_file_path = "";
+
+	// optional variables
+	private static String emulated_file_path = "";
+	private static String timing_file_path = "";
 
 	private static boolean emulate = false;
-	private static String collection_type = "";
+	private static boolean timing = false;
+	private static String collection_type = "sbol2";
+
 	public static void main(String[] args) throws Exception {
+		int arg_count = 0;
 
-		if (args.length != 5) {
-			System.err.println(
-					"Please provide the test file types, test program command, path location of the emulated, retrieved and compared files.");
+		if (args.length < 3) { // must provide the main three args
+			usage();
 			System.exit(1);
-		} else if (args[1].equals("-e")) {
-			tester_cmd = args[2];
-			retrieved_file_path = args[3];
-			compared_file_path = args[4]; 
-			collection_type = args[0];
 		} else {
-			emulate = true;
-
-			collection_type = args[0];
-			tester_cmd = args[1];
-			emulated_file_path = args[2];
-			retrieved_file_path = args[3];
-			compared_file_path = args[4]; 
-			
-			if (!new File(emulated_file_path).exists() && !new File(emulated_file_path).isDirectory()) {
-				new File(emulated_file_path).mkdir();
+			tester_cmd = args[0];
+			compared_file_path = args[1];
+			retrieved_file_path = args[2];
+			while (arg_count < args.length) {
+				if (args[arg_count].equals("-f")) {
+					collection_type = args[arg_count + 1];
+				} else if (args[arg_count].equals("-e")) {
+					emulate = true;
+					emulated_file_path = args[arg_count + 1];
+				} else if (args[arg_count].equals("-t")) {
+					timing = true;
+					timing_file_path = args[arg_count + 1];
+				} else if (args[arg_count].equals("-h")) {
+					usage();
+				}
+				arg_count++;
 			}
-			else {
-				FileUtils.cleanDirectory(new File(emulated_file_path));
-			}
 		}
 
-		if (!new File(retrieved_file_path).exists() && !new File(retrieved_file_path).isDirectory())
+		createCleanDir(compared_file_path);
+		createCleanDir(retrieved_file_path);
 
-		{
-			new File(retrieved_file_path).mkdir();
-		}
-		else 
-		{
-			FileUtils.cleanDirectory(new File(retrieved_file_path));
-		}
-
-		if (!new File(compared_file_path).exists() && !new File(compared_file_path).isDirectory()) {
-			new File(compared_file_path).mkdir();
-		}
-		else
-		{
-			FileUtils.cleanDirectory(new File(compared_file_path));
-		}
+		if (emulate)
+			createCleanDir(emulated_file_path);
+		if (timing)
+			createCleanDir(timing_file_path);
 
 		SBOLTestBuilder wrapper = new SBOLTestBuilder(collection_type);
 		int sizeOfTestSuite = wrapper.getSizeOfTestSuite();
@@ -83,8 +78,8 @@ public class SBOLTestRunner {
 		int fail = 0;
 		for (File f : wrapper.getTestFiles()) {
 			i++;
-			fs = new FileOutputStream(
-					compared_file_path + f.getName().substring(0, f.getName().length() - 4) + "_file_comparisonErrors.txt");
+			fs = new FileOutputStream(compared_file_path + f.getName().substring(0, f.getName().length() - 4)
+					+ "_file_comparisonErrors.txt");
 			bs = new BufferedOutputStream(fs);
 			printStream = new PrintStream(bs, true);
 			System.setErr(printStream);
@@ -100,12 +95,19 @@ public class SBOLTestRunner {
 					String emulated_full_fp = emulated_file_path + filename + "_emulated.xml";
 
 					try {
-						
-						/*FOR DEBUG  */
-						//System.out.println(String.format("%s %s %s %s", tester_cmd, f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
-						
-						test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
-								f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+
+						/* FOR DEBUG */
+						// System.out.println(String.format("%s %s %s %s", tester_cmd,
+						// f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+
+						if (timing) {
+							test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s %s", tester_cmd,
+									f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp, timing_file_path));
+						} else {
+							test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
+									f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+						}
+
 						test_runner.waitFor(); // wait for the runner to finish
 												// running
 
@@ -138,16 +140,22 @@ public class SBOLTestRunner {
 					System.err.println(emulatorErrorCnt);
 
 					wrapper.compare(f.getName(), emulated, retrieved);
-				} 
-				else { //no emulator given for application
+				} else { // no emulator given for application
 					try {
-						//System.out.println(String.format("%s %s %s", tester_cmd, f.getAbsolutePath(), retrieved_full_fp));
-						
-						test_runner = Runtime.getRuntime()
-								.exec(String.format("%s %s %s", tester_cmd, f.getAbsolutePath(), retrieved_full_fp));
+						// System.out.println(String.format("%s %s %s", tester_cmd, f.getAbsolutePath(),
+						// retrieved_full_fp));
+
+						if (timing) {
+							test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
+									f.getAbsolutePath(), retrieved_full_fp, timing_file_path));
+						} else {
+							test_runner = Runtime.getRuntime().exec(String.format("%s %s %s", tester_cmd,
+									f.getAbsolutePath(), retrieved_full_fp));
+
+						}
 						test_runner.waitFor(); // wait for the runner to finish
 												// running
-						
+
 						if (test_runner.exitValue() != 0) {
 							InputStream err = test_runner.getErrorStream();
 							byte c[] = new byte[err.available()];
@@ -194,8 +202,7 @@ public class SBOLTestRunner {
 						System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
 						System.err.println("Success");
 					}
-				}
-				 else {
+				} else {
 					success++;
 					System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
 					System.err.println("Success");
@@ -228,6 +235,31 @@ public class SBOLTestRunner {
 			printStream.close();
 		}
 		System.setErr(null);
+	}
+
+	private static void usage() {
+		System.err.println("SBOLTestRunner ");
+		System.err.println("Description: performs round-trip testing of an SBOL application\n"
+				+ "and can test with SBOL 1, SBOL2, and GenBank files.");
+		System.err.println();
+		System.err.println("Usage:");
+		System.err.println(
+				"\tjava -jar SBOLTestRunner.jar <testAppCommand> <comparedFilePath> <retrievedFilePath> [options] [-e <emulatedFilePath> -t <timingFilePath> -f <fileType>]");
+		System.err.println();
+		System.err.println("Options:");
+		System.err.println("\t-e  <emulate> provide file path to print emulated files from test application");
+		System.err.println("\t-t  <timing> provide file path to print timing statistics");
+		System.err
+				.println("\t-f  <collectionType> specifies file types (SBOL1/SBOL2/GenBank) for input (default=SBOL2)");
+	}
+
+	private static void createCleanDir(String dirPath) throws IOException {
+		if (new File(dirPath).exists() && !new File(dirPath).isDirectory()) {
+			new File(dirPath).mkdir();
+		} else {
+			FileUtils.cleanDirectory(new File(dirPath));
+
+		}
 	}
 
 }

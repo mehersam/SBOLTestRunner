@@ -37,25 +37,25 @@ public class TestCollection {
 	}
 
 	public Collection<File> get_Collection(String id) throws Exception {
-		if (id.equals("-s2"))
+		if (id.equals("-sbol2"))
 			return sbol2();
-		else if (id.equals("-s1"))
+		else if (id.equals("-sbol1"))
 			return sbol1();
-		else if (id.equals("-gb"))
+		else if (id.equals("-genbank"))
 			return gb();
-		else if (id.equals("-i"))
+		else if (id.equals("-invalid"))
 			return invalidFiles();
 		else if (id.equals("-rdf"))
 			return rdf();
 		else if (id.equals("-all"))
 			return all();
-		else if(id.equals("-s"))
+		else if(id.equals("-structural"))
 			return structural();
-		else if(id.equals("-f"))
+		else if(id.equals("-functional"))
 			return functional();
-		else if(id.equals("-a"))
+		else if(id.equals("-auxiliary"))
 			return auxillary();
-		else if(id.equals("-sf"))
+		else if(id.equals("-structfunc"))
 			return structAndFunc();
 		else
 			throw new Exception("Invalid id passed, cannot find Collection");
