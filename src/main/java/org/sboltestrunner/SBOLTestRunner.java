@@ -127,7 +127,6 @@ public class SBOLTestRunner {
 
 					File emulated_File = new File(emulated_full_fp);
 					retrieved_File = new File(retrieved_full_fp);
-
 					SBOLDocument emulated = SBOLReader.read(emulated_File);
 					retrieved = SBOLReader.read(retrieved_File);
 
@@ -254,7 +253,7 @@ public class SBOLTestRunner {
 	}
 
 	private static void createCleanDir(String dirPath) throws IOException {
-		if (new File(dirPath).exists() && !new File(dirPath).isDirectory()) {
+		if (!new File(dirPath).exists() && !new File(dirPath).isDirectory()) {
 			new File(dirPath).mkdir();
 		} else {
 			FileUtils.cleanDirectory(new File(dirPath));
