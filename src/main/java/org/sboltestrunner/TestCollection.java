@@ -4,7 +4,13 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.net.URISyntaxException;
+import java.net.URI;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -61,7 +67,29 @@ public class TestCollection {
 			throw new Exception("Invalid id passed, cannot find Collection");
 
 	}
-	
+
+    private Collection<File> getTestCases(String group) {
+        Collection<File> testCases = new HashSet<File>();
+
+		try {
+            Path tempDir = Files.createTempDirectory("sbh-test");
+            InputStream manifestStream = TestCollection.class.getResourceAsStream("/SBOLTestSuite/" + group + "/manifest");
+            BufferedReader br = new BufferedReader(new InputStreamReader(manifestStream));
+            String testCaseFileName;
+
+            while( (testCaseFileName= br.readLine()) != null) {
+                InputStream testCaseStream = TestCollection.class.getResourceAsStream("/SBOLTestSuite/" + group + "/" + testCaseFileName);
+                Path testCasePath = tempDir.resolve(testCaseFileName);
+                Files.copy(testCaseStream, testCasePath);
+
+                testCases.add(testCasePath.toFile());
+            }
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+
+		return testCases;
+    }
 	
 	private Collection<File> all() throws IOException {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
@@ -74,86 +102,23 @@ public class TestCollection {
 	}
 
 	private Collection<File> sbol2() throws IOException {
-
-		File file_base = null;
-		java.util.Collection<File> sbol_files = new HashSet<File>();
-
-//		InputStream resourceAsStream = TestCollection.class.getResourceAsStream("/SBOLTestSuite/SBOL2/");
-//
-//		File tempFile = File.createTempFile(String.valueOf(resourceAsStream.hashCode()), ".tmp");
-//	    /tempFile.deleteOnExit();
-
-		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/SBOL2/").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-		return sbol_files;
+		return getTestCases("SBOL2");
 	}
 
 	private Collection<File> sbol1() {
-
-		File file_base = null;
-		java.util.Collection<File> sbol_files = new HashSet<File>();
-		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/SBOL1/").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-
-		return sbol_files;
+		return getTestCases("SBOL1");
 	}
 
 	private Collection<File> gb() {
-		File file_base = null;
-		java.util.Collection<File> sbol_files = new HashSet<File>();
-		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/Genbank/").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-
-		return sbol_files;
+        return getTestCases("GenBank");
 	}
 
 	private Collection<File> invalidFiles() {
-		File file_base = null;
-		java.util.Collection<File> sbol_files = new HashSet<File>();
-		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/InvalidFiles/").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-
-		return sbol_files;
+        return getTestCases("InvalidFiles");
 	}
 
 	private Collection<File> rdf() {
-
-		File file_base = null;
-		java.util.Collection<File> sbol_files = new HashSet<File>();
-		try {
-			file_base = new File(TestCollection.class.getResource("/SBOLTestSuite/RDF/").toURI());
-		} catch (URISyntaxException e1) {
-			e1.printStackTrace();
-		}
-		for (File f : file_base.listFiles()) {
-			sbol_files.add(f);
-		}
-
-		return sbol_files;
+        return getTestCases("RDF");
 	}
 
 	private Collection<File> structural() throws SBOLValidationException, IOException, SBOLConversionException {
