@@ -233,6 +233,10 @@ public class SBOLTestRunner {
 			bs.close();
 			printStream.close();
 		}
+
+        if(fail > 0) {
+            System.exit(1); // Indicate a case didn't pass
+        }
 		System.setErr(null);
 	}
 
