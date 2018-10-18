@@ -63,7 +63,7 @@ e. The file path for where exported files will be retrieved from. <br />
 f. The file path for where the imported and exported files will be compared. <br />
 
 
-### Compiling and Packaging each Test Runner 
+### Compiling and Packaging 
 
 1. [Setup](http://maven.apache.org/download.cgi) Apache Maven. A tutorial on using Apache Maven is provided [here](http://maven.apache.org/guides/getting-started/index.html).
 
