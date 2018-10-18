@@ -37,7 +37,7 @@ c. The command to run the application being tested. <br />
 d. The file path for where exported files will be retrieved from. <br />
 e. The file path for where the imported and exported files will be compared. <br />
 
-### Extended ROUND-TRIP
+### EXTENDED ROUND-TRIP
 
 The SBOL TestRunner can be run through the command-line by using the following command: 
 
