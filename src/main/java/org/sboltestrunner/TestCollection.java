@@ -61,6 +61,8 @@ public class TestCollection {
 			return rdf();
 		else if (id.equals("all"))
 			return all();
+		else if (id.equals("allValid"))
+			return allValid();
 		else if(id.equals("structural"))
 			return structural();
 		else if(id.equals("functional"))
@@ -106,6 +108,18 @@ public class TestCollection {
 		sbol_files.addAll(sbol1());
 		sbol_files.addAll(gb());
 		sbol_files.addAll(invalidFiles());
+		sbol_files.addAll(rdf());
+		return sbol_files;
+	}
+	
+	private Collection<File> allValid() throws IOException {
+		java.util.Collection<File> sbol_files = new HashSet<File>();
+		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
+		sbol_files.addAll(sbol1());
+		sbol_files.addAll(gb());
 		sbol_files.addAll(rdf());
 		return sbol_files;
 	}
