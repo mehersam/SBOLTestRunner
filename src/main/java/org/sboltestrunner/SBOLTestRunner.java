@@ -31,7 +31,7 @@ public class SBOLTestRunner {
 
 	private static boolean emulate = false;
 	private static boolean timing = false;
-	private static String collection_type = "sbol2";
+	private static String collection_type = "default";
 
 	public static void main(String[] args) throws Exception {
 		int arg_count = 0;
