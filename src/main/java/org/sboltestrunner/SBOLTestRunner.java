@@ -6,8 +6,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.PrintStream;
+import java.lang.Thread;
+import java.lang.Runnable;
 import java.net.URISyntaxException;
+import java.util.Scanner;
 
 import org.apache.commons.io.FileUtils;
 import org.sbolstandard.core2.SBOLConversionException;
@@ -111,6 +115,9 @@ public class SBOLTestRunner {
 									f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
 						}
 
+                        redirect(test_runner.getInputStream(), System.out);
+                        redirect(test_runner.getErrorStream(), System.err);
+
 						test_runner.waitFor(); // wait for the runner to finish
 												// running
 
@@ -155,6 +162,10 @@ public class SBOLTestRunner {
 									f.getAbsolutePath(), retrieved_full_fp));
 
 						}
+
+                        redirect(test_runner.getInputStream(), System.out);
+                        redirect(test_runner.getErrorStream(), System.err);
+
 						test_runner.waitFor(); // wait for the runner to finish
 												// running
 
@@ -267,5 +278,16 @@ public class SBOLTestRunner {
 
 		}
 	}
+
+    private static void redirect(final InputStream src, final PrintStream dest) {
+        new Thread(new Runnable() {
+            public void run() {
+                Scanner sc = new Scanner(src);
+                while (sc.hasNextLine()) {
+                    dest.println(sc.nextLine());
+                }
+            }
+        }).start();
+    }
 
 }
