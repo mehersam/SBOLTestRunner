@@ -129,8 +129,8 @@ public class TestCollection {
 	private Collection<File> defaultSBOL2() throws IOException {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol2());
-		sbol_files.addAll(sbol2_bp());
-		sbol_files.addAll(sbol2_ic());
+		//sbol_files.addAll(sbol2_bp());
+		//sbol_files.addAll(sbol2_ic());
 		return sbol_files;
 	}
 
