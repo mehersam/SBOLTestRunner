@@ -91,6 +91,8 @@ public class SBOLTestRunner {
 				SBOLDocument retrieved = null;
 				Process test_runner = null;
 
+                System.out.println(String.format("Running %s", filename));
+
 				if (emulate) {
 					String emulated_full_fp = emulated_file_path + filename + "_emulated.xml";
 					String timing_full_fp = timing_file_path + filename + "_timing.txt";
