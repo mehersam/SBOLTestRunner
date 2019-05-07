@@ -13,8 +13,7 @@ the input file, this file should be written to the argument filepath provided.
 Running SBOL TestRunner stand-alone
 =================================
 
-SIMPLE ROUND-TRIP
-=================================
+### SIMPLE ROUND-TRIP
 
 The SBOL TestRunner can be run through the command-line by using the following command: 
 
@@ -38,8 +37,7 @@ c. The command to run the application being tested. <br />
 d. The file path for where exported files will be retrieved from. <br />
 e. The file path for where the imported and exported files will be compared. <br />
 
-Extended ROUND-TRIP
-=================================
+### EXTENDED ROUND-TRIP
 
 The SBOL TestRunner can be run through the command-line by using the following command: 
 
@@ -64,11 +62,15 @@ d. The file path for where the emulated files exist. <br />
 e. The file path for where exported files will be retrieved from. <br />
 f. The file path for where the imported and exported files will be compared. <br />
 
-Compilation
-=================================
 
-To run the SBOLTestRunner from source, clone the repository and build with the following command: 
+### Compiling and Packaging 
 
- mvn clean install
- 
-The jar file should be found within the 'target' directory. The same steps to run the SBOLTestRunner should be followed as described above.
+1. [Setup](http://maven.apache.org/download.cgi) Apache Maven. A tutorial on using Apache Maven is provided [here](http://maven.apache.org/guides/getting-started/index.html).
+
+2. In the command line, change to the directory of the SBOLTestRunner (e.g. ```cd /path/to/SBOLTestRunner```) and execute the following command
+
+```
+mvn package
+```
+
+This will compile the SBOLTestRunner source files, package the compiled source into a SBOLTestRunner JAR file (```SBOLTestRunner-<version>-SNAPSHOT-withDependencies.jar```), and place the JAR file into the ```core2/target``` sub-directory. 

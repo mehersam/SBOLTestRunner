@@ -31,7 +31,7 @@ public class SBOLTestRunner {
 
 	private static boolean emulate = false;
 	private static boolean timing = false;
-	private static String collection_type = "sbol2";
+	private static String collection_type = "default";
 
 	public static void main(String[] args) throws Exception {
 		int arg_count = 0;
@@ -95,16 +95,17 @@ public class SBOLTestRunner {
 
 				if (emulate) {
 					String emulated_full_fp = emulated_file_path + filename + "_emulated.xml";
+					String timing_full_fp = timing_file_path + filename + "_timing.txt";
 
 					try {
 
 						/* FOR DEBUG */
-						// System.out.println(String.format("%s %s %s %s", tester_cmd,
-						// f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));
+						//System.out.println(String.format("%s %s %s %s %s", tester_cmd,
+						//			f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp, timing_full_fp));
 
 						if (timing) {
 							test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s %s", tester_cmd,
-									f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp, timing_file_path));
+									f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp, timing_full_fp));
 						} else {
 							test_runner = Runtime.getRuntime().exec(String.format("%s %s %s %s", tester_cmd,
 									f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp));

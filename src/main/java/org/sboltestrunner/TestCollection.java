@@ -45,6 +45,12 @@ public class TestCollection {
 	public Collection<File> get_Collection(String id) throws Exception {
 		if (id.equals("sbol2"))
 			return sbol2();
+		else if (id.equals("sbol2_bp"))
+			return sbol2_bp();
+		else if (id.equals("sbol2_nc"))
+			return sbol2_nc();
+		else if (id.equals("sbol2_ic"))
+			return sbol2_ic();
 		else if (id.equals("sbol1"))
 			return sbol1();
 		else if (id.equals("genbank"))
@@ -55,6 +61,8 @@ public class TestCollection {
 			return rdf();
 		else if (id.equals("all"))
 			return all();
+		else if (id.equals("allValid"))
+			return allValid();
 		else if(id.equals("structural"))
 			return structural();
 		else if(id.equals("functional"))
@@ -62,7 +70,9 @@ public class TestCollection {
 		else if(id.equals("auxiliary"))
 			return auxillary();
 		else if(id.equals("structfunc"))
-			return structAndFunc();
+			return structAndFunc();		
+		else if(id.equals("default"))
+			return defaultSBOL2();
 		else
 			throw new Exception("Invalid id passed, cannot find Collection");
 
@@ -94,15 +104,50 @@ public class TestCollection {
 	private Collection<File> all() throws IOException {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
 		sbol_files.addAll(sbol1());
 		sbol_files.addAll(gb());
 		sbol_files.addAll(invalidFiles());
 		sbol_files.addAll(rdf());
 		return sbol_files;
 	}
+	
+	private Collection<File> allValid() throws IOException {
+		java.util.Collection<File> sbol_files = new HashSet<File>();
+		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
+		sbol_files.addAll(sbol1());
+		sbol_files.addAll(gb());
+		sbol_files.addAll(rdf());
+		return sbol_files;
+	}
+	
+	private Collection<File> defaultSBOL2() throws IOException {
+		java.util.Collection<File> sbol_files = new HashSet<File>();
+		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		return sbol_files;
+	}
 
 	private Collection<File> sbol2() throws IOException {
 		return getTestCases("SBOL2");
+	}
+	
+	private Collection<File> sbol2_bp() throws IOException {
+		return getTestCases("SBOL2_bp");
+	}
+	
+	private Collection<File> sbol2_ic() throws IOException {
+		return getTestCases("SBOL2_ic");
+	}
+	
+	private Collection<File> sbol2_nc() throws IOException {
+		return getTestCases("SBOL2_nc");
 	}
 
 	private Collection<File> sbol1() {
@@ -126,6 +171,9 @@ public class TestCollection {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol1());
 		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
 
 		Collection<File> structuralFiles = new HashSet<File>();
 		for (File f : sbol_files) {
@@ -151,6 +199,9 @@ public class TestCollection {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol1());
 		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
 
 		Collection<File> functionalFiles = new HashSet<File>();
 		for (File f : sbol_files) {
@@ -177,6 +228,9 @@ public class TestCollection {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol1());
 		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
 
 		Collection<File> auxFiles = new HashSet<File>();
 		for (File f : sbol_files) {
@@ -204,6 +258,9 @@ public class TestCollection {
 		java.util.Collection<File> sbol_files = new HashSet<File>();
 		sbol_files.addAll(sbol1());
 		sbol_files.addAll(sbol2());
+		sbol_files.addAll(sbol2_bp());
+		sbol_files.addAll(sbol2_ic());
+		sbol_files.addAll(sbol2_nc());
 
 		Collection<File> sAndfFiles = new HashSet<File>();
 		for (File f : sbol_files) {
