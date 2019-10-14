@@ -12,6 +12,8 @@ import java.lang.Thread;
 import java.lang.Runnable;
 import java.net.URISyntaxException;
 import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashSet;
 
 import org.apache.commons.io.FileUtils;
 import org.sbolstandard.core2.SBOLConversionException;
@@ -32,6 +34,7 @@ public class SBOLTestRunner {
 	// optional variables
 	private static String emulated_file_path = "";
 	private static String timing_file_path = "";
+    private static HashSet<String> filtered_tests = new HashSet<>();
 
 	private static boolean emulate = false;
 	private static boolean timing = false;
@@ -47,6 +50,7 @@ public class SBOLTestRunner {
 			tester_cmd = args[0];
 			compared_file_path = args[1];
 			retrieved_file_path = args[2];
+
 			while (arg_count < args.length) {
 				if (args[arg_count].equals("-f")) {
 					collection_type = args[arg_count + 1];
@@ -58,7 +62,10 @@ public class SBOLTestRunner {
 					timing_file_path = args[arg_count + 1];
 				} else if (args[arg_count].equals("-h")) {
 					usage();
-				}
+				} else if (args[arg_count].equals("-F")) {
+                    String files = args[arg_count + 1];
+                    filtered_tests = new HashSet<String>(Arrays.asList(files.split(",")));
+                }
 				arg_count++;
 			}
 		}
@@ -71,7 +78,7 @@ public class SBOLTestRunner {
 		if (timing)
 			createCleanDir(timing_file_path);
 
-		SBOLTestBuilder wrapper = new SBOLTestBuilder(collection_type);
+		SBOLTestBuilder wrapper = new SBOLTestBuilder(collection_type, filtered_tests);
 		int sizeOfTestSuite = wrapper.getSizeOfTestSuite();
 		FileOutputStream fs = null;
 		BufferedOutputStream bs = null;
@@ -80,6 +87,7 @@ public class SBOLTestRunner {
 		int i = 0;
 		int success = 0;
 		int fail = 0;
+        HashSet<String> failed_files = new HashSet<>();
 		for (File f : wrapper.getTestFiles()) {
 			i++;
 			fs = new FileOutputStream(compared_file_path + f.getName().substring(0, f.getName().length() - 4)
@@ -102,7 +110,6 @@ public class SBOLTestRunner {
 					String timing_full_fp = timing_file_path + filename + "_timing.txt";
 
 					try {
-
 						/* FOR DEBUG */
 						//System.out.println(String.format("%s %s %s %s %s", tester_cmd,
 						//			f.getAbsolutePath(), emulated_full_fp, retrieved_full_fp, timing_full_fp));
@@ -132,7 +139,6 @@ public class SBOLTestRunner {
 					} catch (Exception e) {
 						System.err.println("TestRunner failed to execute properly\n\n" + e.getMessage());
 						System.err.println(e.getStackTrace());
-
 					}
 
 					File emulated_File = new File(emulated_full_fp);
@@ -180,7 +186,6 @@ public class SBOLTestRunner {
 					} catch (Exception e) {
 						System.err.println("TestRunner failed to execute properly\n\n" + e.getMessage());
 						System.err.println(e.getStackTrace());
-
 					}
 
 					retrieved_File = new File(retrieved_full_fp);
@@ -197,7 +202,7 @@ public class SBOLTestRunner {
 
 					wrapper.compare(f.getName(), inputFile, retrieved);
 				}
-
+               
 				if (SBOLValidate.getNumErrors() != 0) {
 					int errorCnt = 0;
 					for (String error : SBOLValidate.getErrors()) {
@@ -208,8 +213,9 @@ public class SBOLTestRunner {
 					}
 					if (errorCnt > 0) {
 						fail++;
-						System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
+						System.out.println(i + " ogf " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 						System.err.println("Fail");
+                        failed_files.add(f.getName());
 					} else {
 						success++;
 						System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Success " + success);
@@ -225,16 +231,19 @@ public class SBOLTestRunner {
 				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 				e.printStackTrace(System.err);
 				System.err.println("Fail");
+                failed_files.add(f.getName());
 			} catch (SBOLConversionException e) {
 				fail++;
 				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 				e.printStackTrace(System.err);
 				System.err.println("Fail");
+                failed_files.add(f.getName());
 			} catch (Exception e) {
 				fail++;
 				System.out.println(i + " of " + sizeOfTestSuite + ": " + f.getName() + " Fail " + fail);
 				e.printStackTrace(System.err);
 				System.err.println("Fail");
+                failed_files.add(f.getName());
 			}
 			// catch (SynBioHubException e) {
 			// fail++;
@@ -249,6 +258,8 @@ public class SBOLTestRunner {
 		}
 
         if(fail > 0) {
+            String to_retry = String.join(",", failed_files);
+            System.out.println(to_retry);
             System.exit(1); // Indicate a case didn't pass
         }
 		System.setErr(null);

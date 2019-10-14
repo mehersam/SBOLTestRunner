@@ -74,7 +74,7 @@ public class TestCollection {
 		else if(id.equals("default"))
 			return defaultSBOL2();
 		else
-			throw new Exception("Invalid id passed, cannot find Collection");
+			throw new Exception("Invalid id passed, cannot find Collection " + id);
 
 	}
 
