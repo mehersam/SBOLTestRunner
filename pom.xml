@@ -8,10 +8,10 @@
 	<packaging>jar</packaging>
 
 	<repositories>
-		<repository>
-			<id>ossrh</id>
-			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>
+                <repository>
+                  <id>local-repo</id>
+                  <url>file://${project.basedir}/repo</url>
+                </repository>
 	</repositories>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
