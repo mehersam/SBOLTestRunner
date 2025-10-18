@@ -3,6 +3,7 @@ package org.sboltestrunner;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.HashSet;
 import org.sbolstandard.core2.SBOLConversionException;
 import org.sbolstandard.core2.SBOLDocument;
 import org.sbolstandard.core2.SBOLValidate;
@@ -12,11 +13,24 @@ public class SBOLTestBuilder {
 	private TestCollection testCollection; 
 	private Collection<File> sbol_files;
 	
-	public SBOLTestBuilder(String collection_type) throws Exception
+	public SBOLTestBuilder(String collection_type, HashSet<String> toRun) throws Exception
 	{
 		//initialize_results(); 
+        
 		testCollection = new TestCollection(); 
 		sbol_files = testCollection.get_Collection(collection_type);  //for the set of files, pass it into Emulator	
+        
+        if (!toRun.isEmpty()) 
+        {
+            HashSet<File> unfiltered_files = new HashSet<>(sbol_files);
+            for (File f : unfiltered_files)
+            {
+                if (!toRun.contains(f.getName()))
+                {
+                    sbol_files.remove(f);
+                }
+            }
+        }
 	}
 	
 	public void initialize_results()
